@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talk to Jan at Tio</title>
+<meta name="description" content="Book a free 20-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. Get an honest answer on whether a 3-year bachelor's in the Netherlands fits you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ------------------------------------------------------------------
+   BRAND TOKENS. Swap these for the exact tio.nl values (colours + fonts).
+   Current values follow the Tio FAQ prototype palette (navy + teal).
+   Layout idea: one conversion path. Hero promise > proof > reasons to
+   call > who Jan is > screening form > objections (FAQ) > repeat CTA.
+------------------------------------------------------------------- */
+:root {
+  --navy: #102b46;      /* primary / dark sections */
+  --accent: #007f86;    /* buttons, links, highlights */
+  --accent-ink: #ffffff;
+  --paper: #f4f7fa;     /* page background */
+  --surface: #ffffff;   /* cards, form */
+  --ink: #183247;       /* body text */
+  --muted: #526879;
+  --line: #d7e1e8;
+  --soft: #e6f2f2;      /* tinted accent background */
+  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --radius: 14px;
+  --wrap: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0c1824; --surface: #13243a; --ink: #e3ecf3; --muted: #9db2c3;
+    --line: #26415c; --soft: #10303a; --accent: #1aa6ad; --navy: #081320;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0c1824; --surface: #13243a; --ink: #e3ecf3; --muted: #9db2c3;
+  --line: #26415c; --soft: #10303a; --accent: #1aa6ad; --navy: #081320;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.6 var(--font-body); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); }
+h3 { font-size: 1.1rem; }
+p { margin: 0; }
+a { color: var(--accent); }
+img { max-width: 100%; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+section { padding: clamp(56px, 8vw, 96px) 0; }
+.eyebrow { font: 700 .78rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.lede { color: var(--muted); max-width: 62ch; font-size: 1.125rem; }
+.section-head { display: grid; gap: 12px; margin-bottom: 36px; max-width: 760px; }
+.small { font-size: .85rem; color: var(--muted); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 1rem/1 var(--font-body);
+  padding: 16px 24px; border-radius: 999px; border: 2px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+  text-decoration: none; cursor: pointer; transition: filter .15s, transform .15s; }
+.btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
+.btn.sm { padding: 11px 18px; font-size: .92rem; }
+
+/* Header */
+.top { position: sticky; top: 0; z-index: 20; background: var(--navy); color: #fff; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+.brand { font: 800 1.35rem/1 var(--font-display); color: #fff; text-decoration: none; letter-spacing: -.01em; }
+.brand span { display: block; font: 600 .7rem/1.2 var(--font-body); letter-spacing: .12em; text-transform: uppercase; opacity: .75; margin-top: 3px; }
+
+/* Hero */
+.hero { background: var(--navy); color: #fff; padding: clamp(40px, 7vw, 80px) 0 clamp(48px, 7vw, 88px); }
+.hero .wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.3rem); font-weight: 800; letter-spacing: -.015em; }
+.hero h1 em { font-style: normal; color: #7fd6d9; }
+.hero .lede { color: #d5e3ee; margin-top: 18px; }
+.ticks { list-style: none; padding: 0; margin: 24px 0 30px; display: grid; gap: 10px; }
+.ticks li { display: flex; gap: 10px; align-items: flex-start; }
+.ticks li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%;
+  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.hero-cta .small { color: #b9cddd; }
+
+.jan-card { background: var(--surface); color: var(--ink); border-radius: 20px; padding: 26px; box-shadow: 0 20px 50px rgba(0,0,0,.25); display: grid; gap: 18px; }
+.jan-photo { aspect-ratio: 4 / 3; border-radius: 14px; background: linear-gradient(135deg, var(--soft), var(--line)); display: grid; place-items: center;
+  color: var(--accent); font: 800 3.4rem/1 var(--font-display); overflow: hidden; }
+.jan-photo img { width: 100%; height: 100%; object-fit: cover; }
+.jan-card h2 { font-size: 1.35rem; }
+.role-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: .8rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--soft); color: var(--ink); }
+.jan-card blockquote { margin: 0; padding-left: 14px; border-left: 3px solid var(--accent); color: var(--muted); font-style: italic; }
+
+/* Proof bar */
+.proof { background: var(--surface); border-bottom: 1px solid var(--line); padding: 26px 0; }
+.proof .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.stat { display: grid; gap: 4px; }
+.stat b { font: 800 1.7rem/1 var(--font-display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat span { font-size: .92rem; color: var(--muted); line-height: 1.35; }
+
+/* Reasons to call */
+.reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: r; }
+.reason { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: grid; gap: 10px; align-content: start; }
+.reason::before { counter-increment: r; content: counter(r, decimal-leading-zero); font: 800 .9rem/1 var(--font-display); color: var(--accent); }
+.reason p { color: var(--muted); }
+
+/* USPs */
+.usp-band { background: var(--soft); }
+.usps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.usp { padding: 26px 24px 26px 0; border-bottom: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
+.usp:not(:nth-child(3n+1)) { padding-left: 24px; border-left: 1px solid var(--line); }
+.usp b { font: 800 2rem/1 var(--font-display); color: var(--navy); font-variant-numeric: tabular-nums; }
+:root[data-theme="dark"] .usp b { color: #7fd6d9; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .usp b { color: #7fd6d9; } }
+.usp p { color: var(--muted); }
+
+/* Audience tabs */
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.tab { font: 700 .95rem/1 var(--font-body); padding: 12px 18px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.tab[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px, 4vw, 36px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.panel[hidden] { display: none; }
+.panel .q { font: 700 1.35rem/1.3 var(--font-display); }
+.panel ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.hook { margin-top: 14px; color: var(--muted); font-style: italic; }
+
+/* About Jan */
+.about .wrap { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.about-points { display: grid; gap: 14px; margin-top: 22px; }
+.about-points div { display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
+.about-points i { font-style: normal; width: 34px; height: 34px; border-radius: 10px; background: var(--soft); color: var(--accent); display: grid; place-items: center; font-weight: 800; }
+.not-list { background: var(--navy); color: #fff; border-radius: 18px; padding: 28px; display: grid; gap: 14px; }
+.not-list h3 { color: #7fd6d9; }
+.not-list ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: #d5e3ee; }
+
+/* Netherlands */
+.nl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.nl div { border-top: 4px solid var(--accent); background: var(--surface); padding: 22px; border-radius: 0 0 var(--radius) var(--radius); display: grid; gap: 6px; }
+.nl b { font: 800 1.5rem/1.1 var(--font-display); }
+.nl p { color: var(--muted); }
+
+/* Form */
+.book { background: var(--navy); color: #fff; }
+.book .wrap { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.book .lede { color: #d5e3ee; }
+.book-steps { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 14px; counter-reset: s; }
+.book-steps li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; color: #d5e3ee; }
+.book-steps li::before { counter-increment: s; content: counter(s); width: 34px; height: 34px; border-radius: 50%; border: 2px solid #7fd6d9; color: #7fd6d9; display: grid; place-items: center; font-weight: 800; }
+.form { background: var(--surface); color: var(--ink); border-radius: 20px; padding: clamp(22px, 4vw, 34px); box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+.progress { display: flex; gap: 6px; margin-bottom: 20px; }
+.progress span { flex: 1; height: 5px; border-radius: 5px; background: var(--line); }
+.progress span.on { background: var(--accent); }
+.step-label { font-size: .85rem; color: var(--muted); margin-bottom: 6px; }
+fieldset { border: 0; padding: 0; margin: 0 0 18px; display: grid; gap: 10px; }
+legend { font: 700 1.08rem/1.35 var(--font-display); margin-bottom: 10px; padding: 0; }
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; inset: 0; }
+.opt label { display: block; height: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; font-weight: 600; line-height: 1.3; }
+.opt input:checked + label { border-color: var(--accent); background: var(--soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.opt input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 2px; }
+.field { display: grid; gap: 6px; }
+.field label { font-weight: 700; font-size: .95rem; }
+.field input, .field select, .field textarea { width: 100%; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.form-nav .btn.ghost { color: var(--ink); border-color: var(--line); }
+.error { color: #c0392b; font-weight: 600; font-size: .92rem; min-height: 1.3em; }
+.step[hidden] { display: none; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; color: var(--muted); }
+.consent input { margin-top: 4px; }
+.done { display: grid; gap: 14px; }
+.done h3 { font-size: 1.4rem; }
+.summary { background: var(--soft); border-radius: 12px; padding: 16px; font-size: .95rem; display: grid; gap: 4px; }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 860px; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; }
+summary { cursor: pointer; font: 700 1.02rem/1.4 var(--font-display); padding: 18px 28px 18px 0; list-style: none; position: relative; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; position: absolute; right: 0; top: 14px; font-size: 1.5rem; color: var(--accent); }
+details[open] summary::after { content: "–"; }
+details p { padding: 0 0 18px; color: var(--muted); }
+
+/* Final CTA + fair */
+.final { text-align: left; }
+.final .box { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: clamp(26px, 5vw, 48px); display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center; }
+.fair { border: 2px dashed var(--accent); border-radius: 14px; padding: 18px; display: grid; gap: 6px; }
+
+footer { background: var(--navy); color: #b9cddd; padding: 36px 0 100px; font-size: .88rem; }
+footer .wrap { display: grid; gap: 10px; }
+
+/* Mobile sticky CTA */
+.mobile-cta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(0,0,0,.08); }
+.mobile-cta .btn { width: 100%; }
+
+@media (max-width: 900px) {
+  .hero .wrap, .about .wrap, .book .wrap, .panel, .final .box { grid-template-columns: 1fr; }
+  .reasons, .nl { grid-template-columns: 1fr 1fr; }
+  .usps { grid-template-columns: 1fr 1fr; }
+  .usp, .usp:not(:nth-child(3n+1)) { padding: 22px 16px; border-left: 0; }
+  .usp:nth-child(even) { border-left: 1px solid var(--line); }
+  .proof .wrap { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .reasons, .nl, .usps, .opts, .grid2 { grid-template-columns: 1fr; }
+  .usp:nth-child(even) { border-left: 0; }
+  .usp, .usp:not(:nth-child(3n+1)) { padding: 20px 0; }
+  .top .btn { display: none; }
+  .mobile-cta { display: block; }
+  .wrap { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Tio Business School, back to top">tio<span>Business School</span></a>
+    <a class="btn sm" href="#book">Book a free call with Jan</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. HERO: one promise, one person, one action -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color:#7fd6d9">Free 20-minute call · Students, parents &amp; counsellors</p>
+      <h1 id="hero-title" style="margin-top:14px">Before you choose a university abroad, <em>talk to someone who teaches there.</em></h1>
+      <p class="lede">Jan van Breen is a lecturer and International Student Advisor at Tio Business School in the Netherlands. In one call he will tell you honestly whether a 3-year bachelor's at Tio fits you, and what it would take to get there.</p>
+      <ul class="ticks">
+        <li>Bachelor's in 3 years, with September and January intakes</li>
+        <li>Classes of ten students on average and a dedicated study coach</li>
+        <li>Housing guaranteed for the full duration of your programme</li>
+      </ul>
+      <div class="hero-cta">
+        <a class="btn" href="#book">Check if Tio is right for me</a>
+        <span class="small">Takes 60 seconds · No obligation</span>
+      </div>
+    </div>
+
+    <aside class="jan-card" aria-label="About Jan van Breen">
+      <!-- Swap the initials for Jan's photo: <img src="jan.jpg" alt="Jan van Breen"> -->
+      <div class="jan-photo" role="img" aria-label="Photo of Jan van Breen">JvB</div>
+      <div style="display:grid;gap:10px">
+        <h2>Jan van Breen</h2>
+        <div class="role-list">
+          <span class="chip">Lecturer, Tio</span>
+          <span class="chip">International Student Advisor</span>
+          <span class="chip">Executive Management Consultant</span>
+        </div>
+      </div>
+      <blockquote>“I'm a lecturer who knows the classroom, not a recruiter. If Tio isn't the right choice for you, I'll tell you.”</blockquote>
+    </aside>
+  </div>
+</section>
+
+<!-- 2. PROOF BAR: approved claims only -->
+<div class="proof" aria-label="Tio in numbers">
+  <div class="wrap">
+    <div class="stat"><b>#1</b><span>in the Keuzegids hbo, 15 years in a row (HEG 2026)</span></div>
+    <div class="stat"><b>98%</b><span>of alumni found work immediately after studying*</span></div>
+    <div class="stat"><b>55+</b><span>countries represented in the student community</span></div>
+    <div class="stat"><b>99%+</b><span>visa acceptance rate, as reported by Tio</span></div>
+  </div>
+</div>
+
+<!-- 3. WHY BOOK A CALL: what you walk away with -->
+<section aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Why a call, not a brochure</p>
+      <h2 id="why-title">20 minutes with Jan answers what a website can't</h2>
+      <p class="lede">Every family's situation is different. Bring your questions; Jan brings a lecturer's view of what studying at Tio is really like.</p>
+    </div>
+    <div class="reasons">
+      <article class="reason"><h3>An honest fit check</h3><p>Is the fast-track bachelor right for you? You'll get a straight answer, including if Tio isn't the right choice.</p></article>
+      <article class="reason"><h3>The right programme and intake</h3><p>Compare the five bachelor's programmes and decide between the September and January intake.</p></article>
+      <article class="reason"><h3>What a real week looks like</h3><p>Jan teaches at Tio. He can tell you how projects, internships and classes of ten actually work.</p></article>
+      <article class="reason"><h3>Costs, in plain numbers</h3><p>Tuition, instalments and the Talent and Super Talent scholarships, applied to your situation.</p></article>
+      <article class="reason"><h3>Housing, visa and arrival</h3><p>Where you'd live, how the visa works and what happens when you land. Every what-if question answered.</p></article>
+      <article class="reason"><h3>Your admission check</h3><p>Whether your diploma and English level meet the requirements, and the next steps before the deadline.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 4. USPs: content pillars -->
+<section class="usp-band" aria-labelledby="usp-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Why students choose Tio</p>
+      <h2 id="usp-title">Business, learned by doing</h2>
+      <p class="lede">The leading private business school in the Netherlands, built around small classes and real work.</p>
+    </div>
+    <div class="usps">
+      <div class="usp"><b>3 years</b><h3>Fast-track bachelor's</h3><p>180 EC in three years instead of four. Finish sooner, start your career sooner.</p></div>
+      <div class="usp"><b>~60%</b><h3>Practical learning</h3><p>Projects, entrepreneurship and AI tools. Your university project can be an actual company.</p></div>
+      <div class="usp"><b>20 weeks</b><h3>Internship</h3><p>A full internship built into the programme, with paid internship opportunities.</p></div>
+      <div class="usp"><b>~10</b><h3>Students per class</h3><p>A personalised learning experience, with a dedicated study coach for every student.</p></div>
+      <div class="usp"><b>4 cities</b><h3>Guaranteed housing</h3><p>Furnished and ready in Amsterdam, Utrecht, Rotterdam or Eindhoven, for your whole programme.</p></div>
+      <div class="usp"><b>+12 months</b><h3>Orientation Year</h3><p>After graduating, stay an extra year to work or start a business in the Netherlands.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. AUDIENCE TABS: segment by persona -->
+<section aria-labelledby="who-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Who the call is for</p>
+      <h2 id="who-title">Students, parents and counsellors each get something different</h2>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Choose who you are">
+      <button class="tab" role="tab" id="t-student" aria-controls="p-student" aria-selected="true">I'm a student</button>
+      <button class="tab" role="tab" id="t-parent" aria-controls="p-parent" aria-selected="false" tabindex="-1">I'm a parent or guardian</button>
+      <button class="tab" role="tab" id="t-counsellor" aria-controls="p-counsellor" aria-selected="false" tabindex="-1">I'm a school counsellor</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-student" aria-labelledby="t-student">
+      <div><p class="q">“Is this the right start for my future?”</p><p class="hook">What if your bachelor's took 3 years, not 4?</p></div>
+      <ul>
+        <li>Find out if the fast track fits your goals and study style</li>
+        <li>Choose between International Business Management, Business Management, Commerce Economics &amp; Entrepreneurship, Hotel &amp; Event Management and International Tourism Management</li>
+        <li>Hear from a working lecturer what a real week at Tio looks like</li>
+        <li>Pick the September or January intake</li>
+      </ul>
+    </div>
+    <div class="panel" role="tabpanel" id="p-parent" aria-labelledby="t-parent" hidden>
+      <div><p class="q">“Will my child be safe, noticed and set up for work?”</p><p class="hook">Look beyond the tuition fee. Ask what you're getting.</p></div>
+      <ul>
+        <li>Housing guaranteed for the full programme, plus visa support, insurance and airport pick-up</li>
+        <li>Classes of ten and a dedicated study coach, so your child's progress is noticed</li>
+        <li>98% of alumni found work immediately after studying*</li>
+        <li>An adviser who is a lecturer, not a sales agent, with an honest view on fit</li>
+      </ul>
+    </div>
+    <div class="panel" role="tabpanel" id="p-counsellor" aria-labelledby="t-counsellor" hidden>
+      <div><p class="q">“Can I trust this school with my students' path?”</p><p class="hook">A route matched to the student, not one product for everyone.</p></div>
+      <ul>
+        <li>Deadlines, English requirements, fees, housing and visas in one conversation</li>
+        <li>Jan supports the families who reach out and keeps you informed</li>
+        <li>Book Jan to host his Mission, Vision, Strategy workshop at your school</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. MEET JAN: authority + "not a recruiter" -->
+<section class="about" aria-labelledby="about-title" style="padding-top:0">
+  <div class="wrap">
+    <div class="not-list">
+      <h3>What this call is not</h3>
+      <ul>
+        <li>A sales pitch from a recruitment agent</li>
+        <li>A commitment to apply</li>
+        <li>A generic presentation you could read online</li>
+      </ul>
+      <p style="color:#fff">It's a conversation with a lecturer about your plans.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Meet your advisor</p>
+      <h2 id="about-title" style="margin-top:12px">A lecturer and consultant who works in the field he teaches</h2>
+      <p class="lede" style="margin-top:14px">Tio's lecturers are active in the field, often entrepreneurs themselves. Jan combines teaching at Tio Business School with his work as an International Executive Management Consultant, running van Breen Business Support &amp; Consultancy in Amsterdam.</p>
+      <div class="about-points">
+        <div><i>1</i><p><strong>In the classroom.</strong> He teaches Tio students, so he can describe the programme from the inside.</p></div>
+        <div><i>2</i><p><strong>In business.</strong> As an executive consultant he knows what employers look for in graduates.</p></div>
+        <div><i>3</i><p><strong>For international students.</strong> As Tio's International Student Advisor he guides families from first question to arrival.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. WHY THE NETHERLANDS -->
+<section class="usp-band" aria-labelledby="nl-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Why the Netherlands</p>
+      <h2 id="nl-title">English-taught, English-speaking and safe</h2>
+      <p class="lede">All classes are taught in English, and you'll get by in English outside the classroom too.</p>
+    </div>
+    <div class="nl">
+      <div><b>#1</b><p>worldwide on the EF English Proficiency Index</p></div>
+      <div><b>Top 10%</b><p>of the Global Peace Index</p></div>
+      <div><b>5th</b><p>in the World Happiness Index</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. BOOKING + SCREENING FORM -->
+<section class="book" id="book" aria-labelledby="book-title">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color:#7fd6d9">Book your call</p>
+      <h2 id="book-title" style="margin-top:12px">Tell Jan a little about you, then pick a time</h2>
+      <p class="lede" style="margin-top:14px">Five quick questions help Jan prepare, so your 20 minutes go to your questions and not the basics.</p>
+      <ol class="book-steps">
+        <li>Answer five short questions (about 60 seconds)</li>
+        <li>Choose a time that suits you, by video or WhatsApp call</li>
+        <li>Talk to Jan and get an honest answer on fit, costs and next steps</li>
+      </ol>
+    </div>
+
+    <form class="form" id="qualify" novalidate>
+      <div class="progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <p class="step-label" id="stepLabel">Step 1 of 5</p>
+
+      <div class="step" data-step="1">
+        <fieldset>
+          <legend>Who are you booking for?</legend>
+          <div class="opts">
+            <div class="opt"><input type="radio" name="role" id="r1" value="Student"><label for="r1">I'm a student</label></div>
+            <div class="opt"><input type="radio" name="role" id="r2" value="Parent / guardian"><label for="r2">I'm a parent or guardian</label></div>
+            <div class="opt"><input type="radio" name="role" id="r3" value="School counsellor"><label for="r3">I'm a school counsellor</label></div>
+            <div class="opt"><input type="radio" name="role" id="r4" value="Current university student"><label for="r4">I'm already at university</label></div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="step" data-step="2" hidden>
+        <fieldset>
+          <legend>Which programme interests you?</legend>
+          <div class="opts">
+            <div class="opt"><input type="radio" name="programme" id="p1" value="International Business Management"><label for="p1">International Business Management</label></div>
+            <div class="opt"><input type="radio" name="programme" id="p2" value="Business Management"><label for="p2">Business Management</label></div>
+            <div class="opt"><input type="radio" name="programme" id="p3" value="Commerce, Economics & Entrepreneurship"><label for="p3">Commerce, Economics &amp; Entrepreneurship</label></div>
+            <div class="opt"><input type="radio" name="programme" id="p4" value="Hotel & Event Management"><label for="p4">Hotel &amp; Event Management</label></div>
+            <div class="opt"><input type="radio" name="programme" id="p5" value="International Tourism Management"><label for="p5">International Tourism Management</label></div>
+            <div class="opt"><input type="radio" name="programme" id="p6" value="Not sure yet"><label for="p6">Not sure yet, help me choose</label></div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="step" data-step="3" hidden>
+        <fieldset>
+          <legend>When would you like to start?</legend>
+          <div class="opts">
+            <div class="opt"><input type="radio" name="intake" id="i1" value="January 2027"><label for="i1">January 2027</label></div>
+            <div class="opt"><input type="radio" name="intake" id="i2" value="September 2027"><label for="i2">September 2027</label></div>
+            <div class="opt"><input type="radio" name="intake" id="i3" value="2028 or later"><label for="i3">2028 or later</label></div>
+            <div class="opt"><input type="radio" name="intake" id="i4" value="Still exploring"><label for="i4">Still exploring</label></div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Where are you with secondary school?</legend>
+          <div class="opts">
+            <div class="opt"><input type="radio" name="school" id="s1" value="Final year"><label for="s1">In my final year</label></div>
+            <div class="opt"><input type="radio" name="school" id="s2" value="Diploma completed"><label for="s2">Diploma completed</label></div>
+            <div class="opt"><input type="radio" name="school" id="s3" value="One or more years to go"><label for="s3">One or more years to go</label></div>
+            <div class="opt"><input type="radio" name="school" id="s4" value="Not applicable"><label for="s4">Not applicable</label></div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="step" data-step="4" hidden>
+        <fieldset>
+          <legend>Do you have an English test result?</legend>
+          <p class="small" style="margin-top:-6px">Tio accepts IELTS Academic, TOEFL iBT, Cambridge, PTE, TOEIC, LanguageCert and Linguaskill.</p>
+          <div class="opts">
+            <div class="opt"><input type="radio" name="english" id="e1" value="Yes, I have a result"><label for="e1">Yes, I have a result</label></div>
+            <div class="opt"><input type="radio" name="english" id="e2" value="Test booked"><label for="e2">Test booked</label></div>
+            <div class="opt"><input type="radio" name="english" id="e3" value="Not yet"><label for="e3">Not yet</label></div>
+            <div class="opt"><input type="radio" name="english" id="e4" value="Not sure I need one"><label for="e4">Not sure I need one</label></div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Tuition is €24,500 a year. How does that fit your plans?</legend>
+          <div class="opts">
+            <div class="opt"><input type="radio" name="budget" id="b1" value="Fits our budget"><label for="b1">It fits our budget</label></div>
+            <div class="opt"><input type="radio" name="budget" id="b2" value="Interested in scholarships"><label for="b2">I'd like to discuss scholarships</label></div>
+            <div class="opt"><input type="radio" name="budget" id="b3" value="Interested in instalments"><label for="b3">I'd like to pay in instalments</label></div>
+            <div class="opt"><input type="radio" name="budget" id="b4" value="Need to discuss"><label for="b4">I need to talk it through</label></div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="step" data-step="5" hidden>
+        <fieldset>
+          <legend>Where should Jan reach you?</legend>
+          <div class="grid2">
+            <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="country">Country you live in</label><input id="country" name="country" autocomplete="country-name" required></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="phone">WhatsApp number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+356 …"></div>
+          </div>
+          <div class="field">
+            <label for="topics">What would you most like to ask Jan? (optional)</label>
+            <textarea id="topics" name="topics" rows="3" placeholder="e.g. housing in Amsterdam, scholarship criteria, whether my diploma is accepted"></textarea>
+          </div>
+          <label class="consent" for="consent"><input type="checkbox" id="consent" name="consent" required> <span>I agree that Tio Business School may contact me about my study plans. My details are not shared with third parties.</span></label>
+        </fieldset>
+      </div>
+
+      <p class="error" id="formError" role="alert"></p>
+      <div class="form-nav" id="formNav">
+        <button type="button" class="btn ghost sm" id="backBtn" hidden>Back</button>
+        <button type="button" class="btn" id="nextBtn" style="margin-left:auto">Next</button>
+      </div>
+
+      <div class="done" id="done" hidden aria-live="polite">
+        <p class="eyebrow">Almost done</p>
+        <h3>Thanks, <span id="doneName"></span>. Now pick a time with Jan.</h3>
+        <div class="summary" id="summary"></div>
+        <!-- Replace BOOKING_URL in the script with Jan's Calendly / Google Calendar / HubSpot link,
+             or embed the scheduler widget here. -->
+        <a class="btn" id="bookingLink" href="#" target="_blank" rel="noopener">Choose a time for my call</a>
+        <p class="small">Jan will confirm by email. Prefer to message? WhatsApp Jan on <strong>+31 6 2040 7671</strong>.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- 9. FAQ: handle objections before they bounce -->
+<section aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Questions families ask first</p>
+      <h2 id="faq-title">Quick answers</h2>
+      <p class="lede">Anything else? That's what the call is for.</p>
+    </div>
+    <div class="faq">
+      <details><summary>Is the call really free, and do I have to apply afterwards?</summary><p>Yes, it's free and there's no obligation. Jan's goal is to help you decide, and he'll tell you if another route suits you better.</p></details>
+      <details><summary>How long does a bachelor's degree take?</summary><p>Tio's fast-track bachelor's takes 3 years (180 EC), including a 20-week internship. You can start in September or January.</p></details>
+      <details><summary>What's the difference between Business Management and International Business Management?</summary><p>Business Management focuses on business administration: marketing, finance, processes, management and strategy. International Business Management focuses on business and entrepreneurship across countries and cultures.</p></details>
+      <details><summary>What qualifications do I need?</summary><p>A diploma equivalent to the required Dutch secondary-education level, plus proof of English proficiency. Accepted qualifications depend on your education system, so Jan can help you check yours.</p></details>
+      <details><summary>How much does it cost, and are there scholarships?</summary><p>Bachelor's tuition is €24,500 a year plus a €95 enrolment fee, payable in one payment or in instalments. The Talent (25%) and Super Talent (50%) scholarships reduce annual tuition for students with excellent results.</p></details>
+      <details><summary>Is housing really guaranteed?</summary><p>Yes. Housing is guaranteed for the full duration of your programme, furnished and ready in Amsterdam, Utrecht, Rotterdam or Eindhoven. Options include city apartments, suburban living and heritage housing.</p></details>
+      <details><summary>What support do international students get?</summary><p>Visa support, insurance, airport pick-up, a dedicated study coach and a student buddy. Tio reports a visa acceptance rate of over 99%, though no visa can be guaranteed.</p></details>
+      <details><summary>Can I stay in the Netherlands after graduating?</summary><p>Graduates can apply for the Orientation Year: 12 extra months to work or start a business in the Netherlands.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FINAL CTA + optional event strip -->
+<section class="final" style="padding-top:0">
+  <div class="wrap">
+    <div class="box">
+      <div style="display:grid;gap:14px">
+        <h2>Your future is worth a 20-minute conversation</h2>
+        <p class="lede">Get honest answers on fit, costs, housing and admission from a lecturer who teaches at Tio.</p>
+        <div><a class="btn" href="#book">Book my free call with Jan</a></div>
+      </div>
+      <!-- Remove this block after the fair, or swap for the next event -->
+      <div class="fair">
+        <p class="eyebrow">Meet Jan in person</p>
+        <strong>Malta Uni Fair · Monday 23 November 2026</strong>
+        <p class="small">9:00–16:00 · AX ODYCY Hotel, St Paul's Bay. Book a slot so Jan can set time aside for you. Evening and Tuesday 24 November slots are available on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:#fff">Tio Business School</strong> · International Student Advisor: Jan van Breen</p>
+    <p>*98% of Tio alumni found work immediately after studying (HBO Monitor, Tio International Study Guide 26/27). Fees and requirements can change by academic year; please confirm current details on the call.</p>
+  </div>
+</footer>
+
+<div class="mobile-cta"><a class="btn" href="#book">Book a free call with Jan</a></div>
+
+<script>
+// Replace with Jan's scheduler link (Calendly, Google Calendar appointment page, HubSpot meetings…)
+const BOOKING_URL = "https://calendly.com/REPLACE-ME/20min";
+
+// Tabs
+const tabs = [...document.querySelectorAll('.tab')];
+function selectTab(tab) {
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.setAttribute('aria-selected', on);
+    t.tabIndex = on ? 0 : -1;
+    document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+  });
+}
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => selectTab(t));
+  t.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+    selectTab(next); next.focus();
+  });
+});
+
+// Multi-step screening form
+const form = document.getElementById('qualify');
+const steps = [...form.querySelectorAll('.step')];
+const bars = [...form.querySelectorAll('.progress span')];
+const nextBtn = document.getElementById('nextBtn');
+const backBtn = document.getElementById('backBtn');
+const errorEl = document.getElementById('formError');
+let current = 0;
+
+function show(i) {
+  current = i;
+  steps.forEach((s, n) => s.hidden = n !== i);
+  bars.forEach((b, n) => b.classList.toggle('on', n <= i));
+  document.getElementById('stepLabel').textContent = `Step ${i + 1} of ${steps.length}`;
+  backBtn.hidden = i === 0;
+  nextBtn.textContent = i === steps.length - 1 ? 'See available times' : 'Next';
+  errorEl.textContent = '';
+}
+
+function validate(i) {
+  const step = steps[i];
+  const groups = [...new Set([...step.querySelectorAll('input[type=radio]')].map(r => r.name))];
+  for (const g of groups) {
+    if (!form.querySelector(`input[name="${g}"]:checked`)) return 'Please choose an option to continue.';
+  }
+  for (const el of step.querySelectorAll('[required]')) {
+    if (el.type === 'checkbox' && !el.checked) return 'Please tick the box so Jan can contact you.';
+    if (el.type !== 'checkbox' && !el.value.trim()) return `Please fill in your ${el.labels[0].textContent.toLowerCase()}.`;
+    if (el.type === 'email' && !/^\S+@\S+\.\S+$/.test(el.value)) return 'Please enter a valid email address.';
+  }
+  return '';
+}
+
+// Auto-advance on single-question steps for speed
+form.addEventListener('change', e => {
+  if (e.target.type !== 'radio') return;
+  const step = steps[current];
+  const groups = new Set([...step.querySelectorAll('input[type=radio]')].map(r => r.name));
+  const allAnswered = [...groups].every(g => form.querySelector(`input[name="${g}"]:checked`));
+  if (allAnswered && current < steps.length - 1) setTimeout(() => show(current + 1), 220);
+});
+
+nextBtn.addEventListener('click', () => {
+  const msg = validate(current);
+  if (msg) { errorEl.textContent = msg; return; }
+  if (current < steps.length - 1) { show(current + 1); return; }
+  finish();
+});
+backBtn.addEventListener('click', () => show(current - 1));
+form.addEventListener('submit', e => { e.preventDefault(); nextBtn.click(); });
+
+function finish() {
+  const data = Object.fromEntries(new FormData(form));
+  // TODO: send `data` to your CRM / Google Sheet / email webhook here, e.g.
+  // fetch('https://your-endpoint', { method: 'POST', body: JSON.stringify(data) });
+  errorEl.textContent = '';
+  steps.forEach(s => s.hidden = true);
+  document.getElementById('formNav').hidden = true;
+  document.getElementById('stepLabel').hidden = true;
+  form.querySelector('.progress').hidden = true;
+  document.getElementById('doneName').textContent = data.name.split(' ')[0];
+  const rows = [['You are', data.role], ['Programme', data.programme], ['Start', data.intake],
+                ['School', data.school], ['English test', data.english], ['Budget', data.budget]];
+  const summary = document.getElementById('summary');
+  summary.replaceChildren(...rows.map(([k, v]) => {
+    const p = document.createElement('div');
+    const b = document.createElement('strong'); b.textContent = k + ': ';
+    p.append(b, v); return p;
+  }));
+  const url = new URL(BOOKING_URL);
+  url.searchParams.set('name', data.name);
+  url.searchParams.set('email', data.email);
+  document.getElementById('bookingLink').href = url.toString();
+  document.getElementById('done').hidden = false;
+}
+
+show(0);
+
+// Hide the mobile sticky CTA while the booking form is on screen
+const mobileCta = document.querySelector('.mobile-cta');
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver(([e]) => { mobileCta.style.visibility = e.isIntersecting ? 'hidden' : ''; })
+    .observe(document.getElementById('book'));
+}
+</script>
+</body>
+</html>
