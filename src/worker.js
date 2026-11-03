@@ -56,7 +56,9 @@ async function handleLead(request, env) {
 
   if (!env.BREVO_API_KEY) {
     console.error('BREVO_API_KEY is not set');
-    return json({ ok: false, error: 'Server not configured', ref: 'no BREVO_API_KEY' }, 500);
+    // Names only, never values: helps spot a mistyped secret name.
+    const seen = Object.keys(env).filter(k => k !== 'ASSETS').join(', ') || 'none';
+    return json({ ok: false, error: 'Server not configured', ref: `no BREVO_API_KEY (worker sees: ${seen})` }, 500);
   }
 
   const [contact, notify] = await Promise.allSettled([saveContact(lead, env), notifyTeam(lead, env)]);
