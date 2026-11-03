@@ -7,215 +7,227 @@
 <meta name="description" content="Book a free 20-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. Get an honest answer on whether a 3-year bachelor's in the Netherlands fits you.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ------------------------------------------------------------------
-   BRAND TOKENS. Swap these for the exact tio.nl values (colours + fonts).
-   Current values follow the Tio FAQ prototype palette (navy + teal).
+   TIO BRAND TOKENS (sampled from the tio.nl homepage screenshot)
+   Royal blue + lime green, pale-green panels, white cards, pill buttons,
+   ring motif. Single light theme, like tio.nl.
    Layout idea: one conversion path. Hero promise > proof > reasons to
-   call > who Jan is > screening form > objections (FAQ) > repeat CTA.
+   call > USPs > personas > Jan > NL > screening form > FAQ > repeat CTA.
 ------------------------------------------------------------------- */
 :root {
-  --navy: #102b46;      /* primary / dark sections */
-  --accent: #007f86;    /* buttons, links, highlights */
-  --accent-ink: #ffffff;
-  --paper: #f4f7fa;     /* page background */
-  --surface: #ffffff;   /* cards, form */
-  --ink: #183247;       /* body text */
-  --muted: #526879;
-  --line: #d7e1e8;
-  --soft: #e6f2f2;      /* tinted accent background */
-  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
-  --radius: 14px;
-  --wrap: 1120px;
+  --blue: #0636a2;        /* header, headings, CTA bands, footer */
+  --blue-deep: #032b82;   /* search field / pressed */
+  --blue-ring: #1948bc;   /* ring motif on blue */
+  --green: #7de665;       /* primary buttons, accents */
+  --green-pale: #ebf7e9;  /* soft section panels */
+  --ink: #111827;         /* body text (tio.nl uses near-black) */
+  --muted: #4b5563;
+  --line: #d9dee8;
+  --white: #ffffff;
+  --font-display: "Plus Jakarta Sans", "Gilroy", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --radius-xl: 32px;      /* panels and bands */
+  --radius: 22px;         /* cards */
+  --wrap: 1140px;
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0c1824; --surface: #13243a; --ink: #e3ecf3; --muted: #9db2c3;
-    --line: #26415c; --soft: #10303a; --accent: #1aa6ad; --navy: #081320;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #0c1824; --surface: #13243a; --ink: #e3ecf3; --muted: #9db2c3;
-  --line: #26415c; --soft: #10303a; --accent: #1aa6ad; --navy: #081320;
-  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.6 var(--font-body); }
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
-h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); }
-h3 { font-size: 1.1rem; }
+body { margin: 0; background: var(--white); color: var(--ink); font: 400 1.0625rem/1.6 var(--font-body); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 1.12; text-wrap: balance; margin: 0; letter-spacing: -.01em; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--blue); }
+h3 { font-size: 1.2rem; }
 p { margin: 0; }
-a { color: var(--accent); }
+a { color: var(--blue); }
 img { max-width: 100%; }
-.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
-section { padding: clamp(56px, 8vw, 96px) 0; }
-.eyebrow { font: 700 .78rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
-.lede { color: var(--muted); max-width: 62ch; font-size: 1.125rem; }
-.section-head { display: grid; gap: 12px; margin-bottom: 36px; max-width: 760px; }
-.small { font-size: .85rem; color: var(--muted); }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+section { padding: clamp(56px, 8vw, 104px) 0; }
+.eyebrow { font: 700 .8rem/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+.lede { color: var(--ink); max-width: 60ch; font-size: clamp(1.1rem, 1.8vw, 1.35rem); font-weight: 600; line-height: 1.45; }
+.section-head { display: grid; gap: 16px; margin-bottom: 40px; max-width: 820px; }
+.small { font-size: .88rem; color: var(--muted); }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 8px; }
 
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 1rem/1 var(--font-body);
-  padding: 16px 24px; border-radius: 999px; border: 2px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+/* Buttons: tio.nl pills */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 700 1rem/1 var(--font-body);
+  padding: 16px 26px; border-radius: 999px; border: 2px solid var(--green); background: var(--green); color: var(--ink);
   text-decoration: none; cursor: pointer; transition: filter .15s, transform .15s; }
-.btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
-.btn.sm { padding: 11px 18px; font-size: .92rem; }
+.btn::after { content: ""; width: 8px; height: 8px; border: solid currentColor; border-width: 2.5px 2.5px 0 0; transform: rotate(45deg); margin-left: 2px; }
+.btn:hover { filter: brightness(.95); transform: translateY(-1px); }
+.btn.outline { background: transparent; color: var(--blue); border-color: var(--blue); }
+.btn.sm { padding: 12px 20px; font-size: .95rem; }
+.btn.no-arrow::after { display: none; }
 
 /* Header */
-.top { position: sticky; top: 0; z-index: 20; background: var(--navy); color: #fff; }
-.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-.brand { font: 800 1.35rem/1 var(--font-display); color: #fff; text-decoration: none; letter-spacing: -.01em; }
-.brand span { display: block; font: 600 .7rem/1.2 var(--font-body); letter-spacing: .12em; text-transform: uppercase; opacity: .75; margin-top: 3px; }
+.top { position: sticky; top: 0; z-index: 20; background: var(--blue); color: #fff; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; }
+.brand b { font: 800 2.1rem/1 var(--font-display); letter-spacing: -.04em; }
+.brand span { font: 600 .82rem/1.05 var(--font-body); }
 
-/* Hero */
-.hero { background: var(--navy); color: #fff; padding: clamp(40px, 7vw, 80px) 0 clamp(48px, 7vw, 88px); }
-.hero .wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-.hero h1 { font-size: clamp(2rem, 5vw, 3.3rem); font-weight: 800; letter-spacing: -.015em; }
-.hero h1 em { font-style: normal; color: #7fd6d9; }
-.hero .lede { color: #d5e3ee; margin-top: 18px; }
-.ticks { list-style: none; padding: 0; margin: 24px 0 30px; display: grid; gap: 10px; }
-.ticks li { display: flex; gap: 10px; align-items: flex-start; }
-.ticks li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%;
-  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat; }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.hero-cta .small { color: #b9cddd; }
+/* Hero: blue with tio.nl's green half-circle and ring */
+.hero { position: relative; overflow: hidden; background: var(--blue); color: #fff; padding: clamp(44px, 7vw, 88px) 0 clamp(52px, 7vw, 96px); }
+.hero::before { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: var(--green); left: -190px; top: 38%; }
+.hero::after { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; border: 90px solid var(--blue-ring); right: -210px; top: -210px; opacity: .8; }
+.hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero .eyebrow { color: var(--green); }
+.hero h1 { font-size: clamp(2.1rem, 5vw, 3.5rem); margin-top: 16px; }
+.hero h1 em { font-style: normal; color: var(--green); }
+.hero .lede { color: #e4ebfa; font-weight: 500; margin-top: 20px; }
+.ticks { list-style: none; padding: 0; margin: 26px 0 32px; display: grid; gap: 12px; font-weight: 600; }
+.ticks li { display: flex; gap: 12px; align-items: flex-start; }
+.ticks li::before { content: ""; flex: none; width: 22px; height: 22px; margin-top: 2px; border-radius: 50%;
+  background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='%230636a2' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.hero-cta .small { color: #c4d1f0; }
 
-.jan-card { background: var(--surface); color: var(--ink); border-radius: 20px; padding: 26px; box-shadow: 0 20px 50px rgba(0,0,0,.25); display: grid; gap: 18px; }
-.jan-photo { aspect-ratio: 4 / 3; border-radius: 14px; background: linear-gradient(135deg, var(--soft), var(--line)); display: grid; place-items: center;
-  color: var(--accent); font: 800 3.4rem/1 var(--font-display); overflow: hidden; }
+.jan-card { background: var(--white); color: var(--ink); border-radius: var(--radius); padding: 24px; box-shadow: 0 24px 60px rgba(3,23,80,.35); display: grid; gap: 18px; }
+.jan-photo { position: relative; aspect-ratio: 4 / 3; border-radius: 16px; background: var(--green-pale); display: grid; place-items: center;
+  color: var(--blue); font: 800 3.6rem/1 var(--font-display); overflow: hidden; }
 .jan-photo img { width: 100%; height: 100%; object-fit: cover; }
-.jan-card h2 { font-size: 1.35rem; }
+.jan-photo .badge { position: absolute; right: 12px; bottom: 12px; }
+.jan-card h2 { font-size: 1.5rem; color: var(--ink); }
 .role-list { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font-size: .8rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--soft); color: var(--ink); }
-.jan-card blockquote { margin: 0; padding-left: 14px; border-left: 3px solid var(--accent); color: var(--muted); font-style: italic; }
+.chip { font-size: .8rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--white); color: var(--ink); border: 1.5px solid var(--line); }
+.jan-card blockquote { margin: 0; padding-left: 14px; border-left: 4px solid var(--green); color: var(--muted); font-style: italic; }
+
+/* Blue circle badge (tio.nl "10 Studenten per klas") */
+.badge { width: 92px; height: 92px; flex: none; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-content: center; text-align: center; padding: 8px; }
+.badge b { font: 800 1.6rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.badge span { font: 700 .66rem/1.15 var(--font-body); margin-top: 3px; }
 
 /* Proof bar */
-.proof { background: var(--surface); border-bottom: 1px solid var(--line); padding: 26px 0; }
+.proof { background: var(--white); padding: 36px 0 0; }
 .proof .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.stat { display: grid; gap: 4px; }
-.stat b { font: 800 1.7rem/1 var(--font-display); color: var(--accent); font-variant-numeric: tabular-nums; }
-.stat span { font-size: .92rem; color: var(--muted); line-height: 1.35; }
+.stat { display: flex; gap: 14px; align-items: center; }
+.stat .badge { width: 74px; height: 74px; }
+.stat .badge b { font-size: 1.25rem; }
+.stat p { font-size: .93rem; font-weight: 600; line-height: 1.35; }
 
-/* Reasons to call */
-.reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: r; }
-.reason { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: grid; gap: 10px; align-content: start; }
-.reason::before { counter-increment: r; content: counter(r, decimal-leading-zero); font: 800 .9rem/1 var(--font-display); color: var(--accent); }
+/* Reasons */
+.reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: r; }
+.reason { background: var(--white); border: 1.5px solid var(--line); border-radius: var(--radius); padding: 28px; display: grid; gap: 10px; align-content: start; }
+.reason::before { counter-increment: r; content: counter(r); width: 40px; height: 40px; border-radius: 50%; background: var(--green-pale); color: var(--blue); display: grid; place-items: center; font: 800 1rem/1 var(--font-display); }
 .reason p { color: var(--muted); }
 
-/* USPs */
-.usp-band { background: var(--soft); }
-.usps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
-.usp { padding: 26px 24px 26px 0; border-bottom: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
-.usp:not(:nth-child(3n+1)) { padding-left: 24px; border-left: 1px solid var(--line); }
-.usp b { font: 800 2rem/1 var(--font-display); color: var(--navy); font-variant-numeric: tabular-nums; }
-:root[data-theme="dark"] .usp b { color: #7fd6d9; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .usp b { color: #7fd6d9; } }
-.usp p { color: var(--muted); }
+/* Pale-green panel with white cards (tio.nl "Wat biedt Tio jou?") */
+.panel-green { background: var(--green-pale); border-radius: var(--radius-xl); padding: clamp(28px, 6vw, 80px) clamp(20px, 6vw, 96px); }
+.usps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.usp { background: var(--white); border-radius: var(--radius); padding: 28px; display: grid; gap: 12px; align-content: start; }
+.usp h3 { font-size: 1.4rem; }
+.usp p { color: var(--ink); }
+
+/* CTA band (tio.nl "Hulp nodig bij het kiezen van je studie?") */
+.band { position: relative; overflow: hidden; background: var(--blue); color: #fff; border-radius: var(--radius-xl); padding: clamp(36px, 6vw, 72px) clamp(24px, 7vw, 104px);
+  display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+.band::before { content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 95px solid var(--blue-ring); left: -95px; top: -95px; }
+.band > * { position: relative; }
+.band h2 { color: #fff; font-size: clamp(1.4rem, 3vw, 2rem); max-width: 26ch; }
+.band p { color: #d6e0f7; margin-top: 8px; }
 
 /* Audience tabs */
-.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-.tab { font: 700 .95rem/1 var(--font-body); padding: 12px 18px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
-.tab[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px, 4vw, 36px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-.panel[hidden] { display: none; }
-.panel .q { font: 700 1.35rem/1.3 var(--font-display); }
-.panel ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.tab { font: 700 .98rem/1 var(--font-body); padding: 14px 22px; border-radius: 999px; border: 2px solid var(--blue); background: var(--white); color: var(--blue); cursor: pointer; }
+.tab[aria-selected="true"] { background: var(--blue); color: #fff; }
+.panel { background: var(--green-pale); border-radius: var(--radius-xl); padding: clamp(24px, 5vw, 56px); display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.panel .q { font: 800 1.55rem/1.25 var(--font-display); color: var(--blue); }
+.panel ul { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
+.panel li::marker { color: var(--blue); }
 .hook { margin-top: 14px; color: var(--muted); font-style: italic; }
 
 /* About Jan */
 .about .wrap { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
-.about-points { display: grid; gap: 14px; margin-top: 22px; }
-.about-points div { display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
-.about-points i { font-style: normal; width: 34px; height: 34px; border-radius: 10px; background: var(--soft); color: var(--accent); display: grid; place-items: center; font-weight: 800; }
-.not-list { background: var(--navy); color: #fff; border-radius: 18px; padding: 28px; display: grid; gap: 14px; }
-.not-list h3 { color: #7fd6d9; }
-.not-list ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: #d5e3ee; }
+.about-points { display: grid; gap: 16px; margin-top: 24px; }
+.about-points div { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+.about-points i { font-style: normal; width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font: 800 1rem/1 var(--font-display); }
+.not-list { position: relative; overflow: hidden; background: var(--blue); color: #fff; border-radius: var(--radius-xl); padding: 36px; display: grid; gap: 16px; }
+.not-list::after { content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; background: var(--green); right: -110px; bottom: -110px; }
+.not-list h3 { color: var(--green); font-size: 1.4rem; }
+.not-list ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: #dfe7fa; }
+.about .lede { font-weight: 500; font-size: 1.15rem; }
 
 /* Netherlands */
-.nl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.nl div { border-top: 4px solid var(--accent); background: var(--surface); padding: 22px; border-radius: 0 0 var(--radius) var(--radius); display: grid; gap: 6px; }
-.nl b { font: 800 1.5rem/1.1 var(--font-display); }
-.nl p { color: var(--muted); }
+.nl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.nl > div { background: var(--white); border-radius: var(--radius); padding: 26px; display: flex; gap: 16px; align-items: center; }
+.nl p { font-weight: 600; }
 
 /* Form */
-.book { background: var(--navy); color: #fff; }
-.book .wrap { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
-.book .lede { color: #d5e3ee; }
-.book-steps { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 14px; counter-reset: s; }
-.book-steps li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; color: #d5e3ee; }
-.book-steps li::before { counter-increment: s; content: counter(s); width: 34px; height: 34px; border-radius: 50%; border: 2px solid #7fd6d9; color: #7fd6d9; display: grid; place-items: center; font-weight: 800; }
-.form { background: var(--surface); color: var(--ink); border-radius: 20px; padding: clamp(22px, 4vw, 34px); box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+.book { position: relative; overflow: hidden; background: var(--blue); color: #fff; }
+.book::before { content: ""; position: absolute; width: 520px; height: 520px; border-radius: 50%; border: 110px solid var(--blue-ring); left: -300px; bottom: -300px; }
+.book .wrap { position: relative; display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.book h2 { color: #fff; }
+.book .eyebrow { color: var(--green); }
+.book .lede { color: #e4ebfa; font-weight: 500; }
+.book-steps { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 16px; counter-reset: s; }
+.book-steps li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; color: #e4ebfa; align-items: center; }
+.book-steps li::before { counter-increment: s; content: counter(s); width: 40px; height: 40px; border-radius: 50%; background: var(--green); color: var(--blue); display: grid; place-items: center; font: 800 1rem/1 var(--font-display); }
+.form { background: var(--white); color: var(--ink); border-radius: var(--radius); padding: clamp(24px, 4vw, 38px); box-shadow: 0 24px 60px rgba(3,23,80,.35); }
 .progress { display: flex; gap: 6px; margin-bottom: 20px; }
-.progress span { flex: 1; height: 5px; border-radius: 5px; background: var(--line); }
-.progress span.on { background: var(--accent); }
-.step-label { font-size: .85rem; color: var(--muted); margin-bottom: 6px; }
+.progress span { flex: 1; height: 6px; border-radius: 6px; background: var(--line); }
+.progress span.on { background: var(--green); }
+.step-label { font-size: .85rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
 fieldset { border: 0; padding: 0; margin: 0 0 18px; display: grid; gap: 10px; }
-legend { font: 700 1.08rem/1.35 var(--font-display); margin-bottom: 10px; padding: 0; }
-.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+legend { font: 800 1.15rem/1.35 var(--font-display); color: var(--blue); margin-bottom: 10px; padding: 0; }
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .opt { position: relative; }
 .opt input { position: absolute; opacity: 0; inset: 0; }
-.opt label { display: block; height: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; font-weight: 600; line-height: 1.3; }
-.opt input:checked + label { border-color: var(--accent); background: var(--soft); box-shadow: inset 0 0 0 1px var(--accent); }
-.opt input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 2px; }
-.field { display: grid; gap: 6px; }
-.field label { font-weight: 700; font-size: .95rem; }
-.field input, .field select, .field textarea { width: 100%; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px; }
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.opt label { display: flex; align-items: center; height: 100%; padding: 13px 18px; border: 1.5px solid var(--line); border-radius: 999px; cursor: pointer; font-weight: 600; line-height: 1.3; }
+.opt input:checked + label { border-color: var(--blue); background: var(--blue); color: #fff; }
+.opt input:focus-visible + label { outline: 3px solid var(--green); outline-offset: 2px; }
+/* tio.nl field: rounded box with blue label sitting on the border */
+.field { position: relative; display: grid; padding-top: 10px; }
+.field label { position: absolute; top: 0; left: 18px; padding: 0 6px; background: var(--white); color: var(--blue); font-weight: 700; font-size: .85rem; }
+.field input, .field textarea { width: 100%; font: inherit; color: var(--ink); background: var(--white); border: 1.5px solid #c3cad8; border-radius: 999px; padding: 14px 20px; }
+.field textarea { border-radius: 20px; resize: vertical; }
+.field input:focus, .field textarea:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(6,54,162,.15); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .form-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
-.form-nav .btn.ghost { color: var(--ink); border-color: var(--line); }
 .error { color: #c0392b; font-weight: 600; font-size: .92rem; min-height: 1.3em; }
-.step[hidden] { display: none; }
-.consent { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; color: var(--muted); }
-.consent input { margin-top: 4px; }
-.done { display: grid; gap: 14px; }
-.done h3 { font-size: 1.4rem; }
-.summary { background: var(--soft); border-radius: 12px; padding: 16px; font-size: .95rem; display: grid; gap: 4px; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; color: var(--muted); margin-top: 4px; }
+.consent input { margin-top: 4px; accent-color: var(--blue); }
+.done { display: grid; gap: 16px; }
+.done h3 { font-size: 1.5rem; color: var(--blue); }
+.summary { background: var(--green-pale); border-radius: 16px; padding: 18px; font-size: .95rem; display: grid; gap: 4px; }
 
 /* FAQ */
-.faq { display: grid; gap: 10px; max-width: 860px; }
-details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; }
-summary { cursor: pointer; font: 700 1.02rem/1.4 var(--font-display); padding: 18px 28px 18px 0; list-style: none; position: relative; }
+.faq { display: grid; gap: 12px; max-width: 880px; }
+details { background: var(--white); border: 1.5px solid var(--line); border-radius: 20px; padding: 0 24px; }
+details[open] { background: var(--green-pale); border-color: var(--green-pale); }
+summary { cursor: pointer; font: 700 1.05rem/1.4 var(--font-display); padding: 20px 36px 20px 0; list-style: none; position: relative; }
 summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; position: absolute; right: 0; top: 14px; font-size: 1.5rem; color: var(--accent); }
-details[open] summary::after { content: "–"; }
-details p { padding: 0 0 18px; color: var(--muted); }
+summary::after { content: ""; position: absolute; right: 4px; top: 24px; width: 9px; height: 9px; border: solid var(--blue); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); transition: transform .2s; }
+details[open] summary::after { transform: rotate(-135deg); top: 28px; }
+details p { padding: 0 0 20px; color: var(--ink); }
 
-/* Final CTA + fair */
-.final { text-align: left; }
-.final .box { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: clamp(26px, 5vw, 48px); display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center; }
-.fair { border: 2px dashed var(--accent); border-radius: 14px; padding: 18px; display: grid; gap: 6px; }
+/* Fair strip */
+.fair { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; border: 2px solid var(--green); border-radius: var(--radius); padding: 20px 24px; }
+.fair .badge { background: var(--green); color: var(--blue); }
+.fair div:last-child { display: grid; gap: 4px; flex: 1 1 260px; }
 
-footer { background: var(--navy); color: #b9cddd; padding: 36px 0 100px; font-size: .88rem; }
-footer .wrap { display: grid; gap: 10px; }
+footer { background: var(--blue); color: #dfe7fa; padding: 48px 0 110px; font-size: .9rem; }
+footer .wrap { display: grid; gap: 14px; }
+footer .brand b { font-size: 2.6rem; }
 
 /* Mobile sticky CTA */
-.mobile-cta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(0,0,0,.08); }
+.mobile-cta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--white); box-shadow: 0 -6px 20px rgba(3,23,80,.12); }
 .mobile-cta .btn { width: 100%; }
 
 @media (max-width: 900px) {
-  .hero .wrap, .about .wrap, .book .wrap, .panel, .final .box { grid-template-columns: 1fr; }
-  .reasons, .nl { grid-template-columns: 1fr 1fr; }
-  .usps { grid-template-columns: 1fr 1fr; }
-  .usp, .usp:not(:nth-child(3n+1)) { padding: 22px 16px; border-left: 0; }
-  .usp:nth-child(even) { border-left: 1px solid var(--line); }
+  .hero .wrap, .about .wrap, .book .wrap, .panel { grid-template-columns: 1fr; }
+  .reasons, .usps, .nl { grid-template-columns: 1fr 1fr; }
   .proof .wrap { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 600px) {
-  .reasons, .nl, .usps, .opts, .grid2 { grid-template-columns: 1fr; }
-  .usp:nth-child(even) { border-left: 0; }
-  .usp, .usp:not(:nth-child(3n+1)) { padding: 20px 0; }
+  .reasons, .usps, .nl, .opts, .grid2, .proof .wrap { grid-template-columns: 1fr; }
   .top .btn { display: none; }
   .mobile-cta { display: block; }
   .wrap { padding: 0 16px; }
+  .hero::before { width: 160px; height: 160px; left: -120px; }
 }
 </style>
 </head>
@@ -223,7 +235,7 @@ footer .wrap { display: grid; gap: 10px; }
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Tio Business School, back to top">tio<span>Business School</span></a>
+    <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
     <a class="btn sm" href="#book">Book a free call with Jan</a>
   </div>
 </header>
@@ -234,8 +246,8 @@ footer .wrap { display: grid; gap: 10px; }
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap">
     <div>
-      <p class="eyebrow" style="color:#7fd6d9">Free 20-minute call · Students, parents &amp; counsellors</p>
-      <h1 id="hero-title" style="margin-top:14px">Before you choose a university abroad, <em>talk to someone who teaches there.</em></h1>
+      <p class="eyebrow">Free 20-minute call · Students, parents &amp; counsellors</p>
+      <h1 id="hero-title">Before you choose a university abroad, <em>talk to someone who teaches there.</em></h1>
       <p class="lede">Jan van Breen is a lecturer and International Student Advisor at Tio Business School in the Netherlands. In one call he will tell you honestly whether a 3-year bachelor's at Tio fits you, and what it would take to get there.</p>
       <ul class="ticks">
         <li>Bachelor's in 3 years, with September and January intakes</li>
@@ -250,7 +262,7 @@ footer .wrap { display: grid; gap: 10px; }
 
     <aside class="jan-card" aria-label="About Jan van Breen">
       <!-- Swap the initials for Jan's photo: <img src="jan.jpg" alt="Jan van Breen"> -->
-      <div class="jan-photo" role="img" aria-label="Photo of Jan van Breen">JvB</div>
+      <div class="jan-photo" role="img" aria-label="Photo of Jan van Breen">JvB<div class="badge"><b>#1</b><span>Keuzegids hbo</span></div></div>
       <div style="display:grid;gap:10px">
         <h2>Jan van Breen</h2>
         <div class="role-list">
@@ -267,10 +279,10 @@ footer .wrap { display: grid; gap: 10px; }
 <!-- 2. PROOF BAR: approved claims only -->
 <div class="proof" aria-label="Tio in numbers">
   <div class="wrap">
-    <div class="stat"><b>#1</b><span>in the Keuzegids hbo, 15 years in a row (HEG 2026)</span></div>
-    <div class="stat"><b>98%</b><span>of alumni found work immediately after studying*</span></div>
-    <div class="stat"><b>55+</b><span>countries represented in the student community</span></div>
-    <div class="stat"><b>99%+</b><span>visa acceptance rate, as reported by Tio</span></div>
+    <div class="stat"><div class="badge"><b>#1</b></div><p>in the Keuzegids hbo, 15 years in a row (HEG 2026)</p></div>
+    <div class="stat"><div class="badge"><b>98%</b></div><p>of alumni found work immediately after studying*</p></div>
+    <div class="stat"><div class="badge"><b>55+</b></div><p>countries represented in the student community</p></div>
+    <div class="stat"><div class="badge"><b>99%</b></div><p>visa acceptance rate (over 99%, as reported by Tio)</p></div>
   </div>
 </div>
 
@@ -293,24 +305,32 @@ footer .wrap { display: grid; gap: 10px; }
   </div>
 </section>
 
-<!-- 4. USPs: content pillars -->
-<section class="usp-band" aria-labelledby="usp-title">
+<!-- 4. USPs: content pillars, in tio.nl's pale-green panel with white cards -->
+<section aria-labelledby="usp-title" style="padding-top:0">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Why students choose Tio</p>
-      <h2 id="usp-title">Business, learned by doing</h2>
-      <p class="lede">The leading private business school in the Netherlands, built around small classes and real work.</p>
-    </div>
-    <div class="usps">
-      <div class="usp"><b>3 years</b><h3>Fast-track bachelor's</h3><p>180 EC in three years instead of four. Finish sooner, start your career sooner.</p></div>
-      <div class="usp"><b>~60%</b><h3>Practical learning</h3><p>Projects, entrepreneurship and AI tools. Your university project can be an actual company.</p></div>
-      <div class="usp"><b>20 weeks</b><h3>Internship</h3><p>A full internship built into the programme, with paid internship opportunities.</p></div>
-      <div class="usp"><b>~10</b><h3>Students per class</h3><p>A personalised learning experience, with a dedicated study coach for every student.</p></div>
-      <div class="usp"><b>4 cities</b><h3>Guaranteed housing</h3><p>Furnished and ready in Amsterdam, Utrecht, Rotterdam or Eindhoven, for your whole programme.</p></div>
-      <div class="usp"><b>+12 months</b><h3>Orientation Year</h3><p>After graduating, stay an extra year to work or start a business in the Netherlands.</p></div>
+    <div class="panel-green">
+      <div class="section-head">
+        <h2 id="usp-title">What does Tio offer you?</h2>
+        <p class="lede">The leading private business school in the Netherlands. Personal, excellent and entrepreneurial: business, learned by doing.</p>
+      </div>
+      <div class="usps">
+        <div class="usp"><div class="badge"><b>3</b><span>years</span></div><h3>Fast-track bachelor's</h3><p>180 EC in three years instead of four. Finish sooner, start your career sooner.</p></div>
+        <div class="usp"><div class="badge"><b>60%</b><span>practical</span></div><h3>Learning by doing</h3><p>Projects, entrepreneurship and AI tools. Your university project can be an actual company.</p></div>
+        <div class="usp"><div class="badge"><b>20</b><span>week internship</span></div><h3>Real work experience</h3><p>A full internship built into the programme, with paid internship opportunities.</p></div>
+        <div class="usp"><div class="badge"><b>10</b><span>students per class (avg)</span></div><h3>Personal</h3><p>A personalised learning experience, with a dedicated study coach for every student.</p></div>
+        <div class="usp"><div class="badge"><b>4</b><span>cities</span></div><h3>Guaranteed housing</h3><p>Furnished and ready in Amsterdam, Utrecht, Rotterdam or Eindhoven, for your whole programme.</p></div>
+        <div class="usp"><div class="badge"><b>+12</b><span>months</span></div><h3>Orientation Year</h3><p>After graduating, stay an extra year to work or start a business in the Netherlands.</p></div>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="wrap">
+  <div class="band">
+    <div><h2>Not sure which programme or intake suits you?</h2><p>Jan will help you choose in one 20-minute call.</p></div>
+    <a class="btn" href="#book">Book a free call with Jan</a>
+  </div>
+</div>
 
 <!-- 5. AUDIENCE TABS: segment by persona -->
 <section aria-labelledby="who-title">
@@ -364,7 +384,7 @@ footer .wrap { display: grid; gap: 10px; }
         <li>A commitment to apply</li>
         <li>A generic presentation you could read online</li>
       </ul>
-      <p style="color:#fff">It's a conversation with a lecturer about your plans.</p>
+      <p style="color:#fff;position:relative">It's a conversation with a lecturer about your plans.</p>
     </div>
     <div>
       <p class="eyebrow">Meet your advisor</p>
@@ -380,17 +400,18 @@ footer .wrap { display: grid; gap: 10px; }
 </section>
 
 <!-- 7. WHY THE NETHERLANDS -->
-<section class="usp-band" aria-labelledby="nl-title">
+<section aria-labelledby="nl-title" style="padding-top:0">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Why the Netherlands</p>
-      <h2 id="nl-title">English-taught, English-speaking and safe</h2>
-      <p class="lede">All classes are taught in English, and you'll get by in English outside the classroom too.</p>
-    </div>
-    <div class="nl">
-      <div><b>#1</b><p>worldwide on the EF English Proficiency Index</p></div>
-      <div><b>Top 10%</b><p>of the Global Peace Index</p></div>
-      <div><b>5th</b><p>in the World Happiness Index</p></div>
+    <div class="panel-green">
+      <div class="section-head">
+        <h2 id="nl-title">Why the Netherlands?</h2>
+        <p class="lede">All classes are taught in English, and you'll get by in English outside the classroom too.</p>
+      </div>
+      <div class="nl">
+        <div><div class="badge"><b>#1</b></div><p>worldwide on the EF English Proficiency Index</p></div>
+        <div><div class="badge"><b>10%</b><span>top</span></div><p>Top 10% of the Global Peace Index</p></div>
+        <div><div class="badge"><b>5th</b></div><p>in the World Happiness Index</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -399,7 +420,7 @@ footer .wrap { display: grid; gap: 10px; }
 <section class="book" id="book" aria-labelledby="book-title">
   <div class="wrap">
     <div>
-      <p class="eyebrow" style="color:#7fd6d9">Book your call</p>
+      <p class="eyebrow">Book your call</p>
       <h2 id="book-title" style="margin-top:12px">Tell Jan a little about you, then pick a time</h2>
       <p class="lede" style="margin-top:14px">Five quick questions help Jan prepare, so your 20 minutes go to your questions and not the basics.</p>
       <ol class="book-steps">
@@ -501,7 +522,7 @@ footer .wrap { display: grid; gap: 10px; }
 
       <p class="error" id="formError" role="alert"></p>
       <div class="form-nav" id="formNav">
-        <button type="button" class="btn ghost sm" id="backBtn" hidden>Back</button>
+        <button type="button" class="btn outline sm no-arrow" id="backBtn" hidden>Back</button>
         <button type="button" class="btn" id="nextBtn" style="margin-left:auto">Next</button>
       </div>
 
@@ -540,16 +561,16 @@ footer .wrap { display: grid; gap: 10px; }
 </section>
 
 <!-- 10. FINAL CTA + optional event strip -->
-<section class="final" style="padding-top:0">
+<section style="padding-top:0">
   <div class="wrap">
-    <div class="box">
-      <div style="display:grid;gap:14px">
-        <h2>Your future is worth a 20-minute conversation</h2>
-        <p class="lede">Get honest answers on fit, costs, housing and admission from a lecturer who teaches at Tio.</p>
-        <div><a class="btn" href="#book">Book my free call with Jan</a></div>
-      </div>
-      <!-- Remove this block after the fair, or swap for the next event -->
-      <div class="fair">
+    <div class="band">
+      <div><h2>Your future is worth a 20-minute conversation</h2><p>Honest answers on fit, costs, housing and admission from a lecturer who teaches at Tio.</p></div>
+      <a class="btn" href="#book">Book my free call with Jan</a>
+    </div>
+    <!-- Remove this block after the fair, or swap for the next event -->
+    <div class="fair">
+      <div class="badge"><b>23</b><span>Nov</span></div>
+      <div>
         <p class="eyebrow">Meet Jan in person</p>
         <strong>Malta Uni Fair · Monday 23 November 2026</strong>
         <p class="small">9:00–16:00 · AX ODYCY Hotel, St Paul's Bay. Book a slot so Jan can set time aside for you. Evening and Tuesday 24 November slots are available on request.</p>
@@ -562,7 +583,8 @@ footer .wrap { display: grid; gap: 10px; }
 
 <footer>
   <div class="wrap">
-    <p><strong style="color:#fff">Tio Business School</strong> · International Student Advisor: Jan van Breen</p>
+    <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
+    <p><strong style="color:#fff">International Student Advisor:</strong> Jan van Breen · WhatsApp +31 6 2040 7671</p>
     <p>*98% of Tio alumni found work immediately after studying (HBO Monitor, Tio International Study Guide 26/27). Fees and requirements can change by academic year; please confirm current details on the call.</p>
   </div>
 </footer>
