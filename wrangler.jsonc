@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers static site: serves the landing page from ./landing
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tio-book-a-call-jan",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./landing"
+  }
+}
