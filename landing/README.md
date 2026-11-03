@@ -20,7 +20,7 @@ Images are in `img/`.
 ## Before going live
 
 1. **Brand.** Colours were sampled from a tio.nl homepage screenshot: blue `#0636A2`, green `#7DE665`, pale green `#EBF7E9` and ring blue `#1948BC`. They are tokens at the top of `<style>`. The layout copies tio.nl's patterns: pale-green panel with white cards and blue circle badges, rounded blue CTA bands with a ring motif, green and outline pill buttons, and pill fields with a blue floating label. Tio's own heading font isn't on Google Fonts, so Plus Jakarta Sans ExtraBold stands in, with Inter for body text. Swap in the licensed font files and the real logo SVG if you have them.
-2. **Links.** Add the three guide PDF links (`data-guide` buttons in the header) and the Instagram, Facebook, YouTube and TikTok URLs (`.socials` in the footer). They currently point to `#`.
+2. **Links.** All set: booking buttons go to https://meet.brevo.com/jan-van-breen, the three guide buttons open their Brevo forms, and the footer icons link to Tio Student Advisor's YouTube, TikTok, Facebook, Instagram and email.
 3. **Jan's bio.** LinkedIn could not be reached. The bio uses only facts from the Quick Summary. Add specifics such as years of experience, sectors and countries.
 4. **Reply time.** The form says Jan typically responds within 24 hours.
 5. **Lead capture.** Done: the form posts to `/api/lead` (see "Form → Brevo" below).

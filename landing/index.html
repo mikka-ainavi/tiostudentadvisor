@@ -21,6 +21,8 @@
   --blue: #0636a2;        /* header, headings, selected options */
   --blue-deep: #042b7f;
   --green: #7de665;       /* primary action */
+  --red: #c8312a;        /* Malta accent, from the fair artwork */
+  --sky: #bfe4fa;
   --green-pale: #ecf7ea;  /* success / fair panel */
   --ice: #f4f5fc;         /* alternating section background */
   --ice-2: #dae0f3;       /* ice borders, secondary buttons */
@@ -65,6 +67,7 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .btn-blue { background: var(--blue); color: var(--white); }
 .btn-ice { background: var(--ice-2); color: var(--ink); }
 .btn-outline { background: var(--white); color: var(--blue); border-color: var(--blue); }
+.btn-red { background: var(--white); color: var(--red); border-color: var(--red); }
 .btn-lg { padding: 17px 28px; font-size: 1.05rem; }
 .arrow::after { content: ""; width: 7px; height: 7px; border: solid currentColor; border-width: 2.5px 2.5px 0 0; transform: rotate(45deg); }
 
@@ -181,8 +184,10 @@ button[aria-busy="true"] { opacity: .7; cursor: progress; }
 .thanks .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 
 /* Malta fair */
-.fair { background: var(--green-pale); border-radius: var(--radius); padding: clamp(26px, 4vw, 48px); display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: center; }
+.fair { background: linear-gradient(135deg, #dcedfb 0%, #bfe4fa 55%, #9fd9f8 100%); border-radius: var(--radius); padding: clamp(26px, 4vw, 48px); display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: center; }
 .fair-copy { display: grid; gap: 12px; }
+.fair .malta { color: var(--red); }
+.fair .muted { color: #33425a; }
 .fair-date { display: inline-flex; gap: 10px; align-items: center; font-weight: 700; color: var(--blue); }
 .fair-actions { display: grid; gap: 10px; }
 
@@ -238,15 +243,14 @@ footer .brand { color: var(--blue); }
         <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
         <span class="locations">Amsterdam · Utrecht · Rotterdam · Eindhoven</span>
       </div>
-      <a class="btn btn-green" href="#book">Book a free call with Jan</a>
+      <a class="btn btn-green" href="https://meet.brevo.com/jan-van-breen" target="_blank" rel="noopener">Book a free call with Jan</a>
     </div>
   </div>
   <nav class="subnav" aria-label="Download a guide">
     <div class="wrap">
-      <!-- Guide links: replace the # with the PDF links -->
-      <a class="btn btn-blue" href="#" data-guide="housing">Housing Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
-      <a class="btn btn-blue" href="#" data-guide="international">International Study Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
-      <a class="btn btn-green" href="#" data-guide="associate">Associate Degree Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+            <a class="btn btn-blue" href="https://b56ae0e4.sibforms.com/serve/MUIFAJ8hLH4PthO-447USL4n0qaVWA3ENGd4cTB3XuGBcmAFY6ltJb1hP7LsxjbOqhdIA6_6nMWbYPZKwxvzaLDDayOlmDOnEJ_aIOFllO9G89ksHFPKxUMM-fUE82axn2gkZt4ozrjrLLwmQhHj4RVReK0UMQrcQjt0fRtVeB4Zwt3L68nyOVtkevaze2qpgBeuGnzvOlMVqmUHuQ==" data-guide="housing" target="_blank" rel="noopener">Housing Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+      <a class="btn btn-blue" href="https://b56ae0e4.sibforms.com/serve/MUIFALDa5XXRRbKIV1rW1Iv0hbkPKXFT6_mQsQj4nTY5HZXxRg_gnQIyh8C9lNOGf6RkL9zsahMn2UrgUtedEIOwOIBnaKGNUtlCYl6EJV0Oqx7gcHoNMrYAX4UEhbottk0kDVG9u5M-RyzGdF6GYUCM9-OMKv9XXVaR1BaLfu2rdQ0Kykz34XFwrTh-lrSJZhq7g24rXi1DM6Af5w==" data-guide="international" target="_blank" rel="noopener">International Study Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+      <a class="btn btn-green" href="https://b56ae0e4.sibforms.com/serve/MUIFANL85YeYhBJoS-caeHaLxuAYNvRegpRRitARuLl9DAktLyhbTqJnMgrJ4rIIvxLx90UDuExZIboYbYvXwEKM40Bw3j9VCSh-3J_zhBv7jEJp3o-Uk1ig5QyTADPTR12kxRnJWSRTCNKMjy3qYf3_dBc4z7wosJfU_Hd0tLERdZOPRYYeCkV0KQE1MN1l_YgJ140H1CPRt7ZIZw==" data-guide="associate" target="_blank" rel="noopener">Associate Degree Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
     </div>
   </nav>
 </header>
@@ -262,7 +266,7 @@ footer .brand { color: var(--blue); }
       <p class="lede">A free 30-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. You get an honest fit check, including a straight answer if Tio or the Netherlands is not the right choice for you.</p>
       <div class="hero-cta">
         <a class="btn btn-green btn-lg arrow" href="#book">Check your fit and book a call</a>
-        <a class="btn btn-outline btn-lg" href="#malta">Meet Jan in Malta on 23 Nov</a>
+        <a class="btn btn-red btn-lg" href="#malta">Meet Jan in Malta on 23 Nov</a>
       </div>
       <p class="small">Choosing a university is hard. You don't have to figure it out alone.</p>
     </div>
@@ -378,7 +382,8 @@ footer .brand { color: var(--blue); }
         <h3>Thanks, your request is with Jan.</h3>
         <p>He'll be in touch to confirm a time. Meanwhile, take a look at the International Study Guide 26/27 and the Housing guide.</p>
         <div class="row">
-          <a class="btn btn-blue" href="https://www.tio.nl/en/" target="_blank" rel="noopener">Download the Study Guide</a>
+          <a class="btn btn-blue" href="https://b56ae0e4.sibforms.com/serve/MUIFALDa5XXRRbKIV1rW1Iv0hbkPKXFT6_mQsQj4nTY5HZXxRg_gnQIyh8C9lNOGf6RkL9zsahMn2UrgUtedEIOwOIBnaKGNUtlCYl6EJV0Oqx7gcHoNMrYAX4UEhbottk0kDVG9u5M-RyzGdF6GYUCM9-OMKv9XXVaR1BaLfu2rdQ0Kykz34XFwrTh-lrSJZhq7g24rXi1DM6Af5w==" target="_blank" rel="noopener">Download the Study Guide</a>
+          <a class="btn btn-blue" href="https://b56ae0e4.sibforms.com/serve/MUIFAJ8hLH4PthO-447USL4n0qaVWA3ENGd4cTB3XuGBcmAFY6ltJb1hP7LsxjbOqhdIA6_6nMWbYPZKwxvzaLDDayOlmDOnEJ_aIOFllO9G89ksHFPKxUMM-fUE82axn2gkZt4ozrjrLLwmQhHj4RVReK0UMQrcQjt0fRtVeB4Zwt3L68nyOVtkevaze2qpgBeuGnzvOlMVqmUHuQ==" target="_blank" rel="noopener">Download the Housing Guide</a>
           <button type="button" class="btn btn-outline" id="editBtn">Edit my answers</button>
         </div>
       </div>
@@ -392,12 +397,12 @@ footer .brand { color: var(--blue); }
     <div class="fair">
       <div class="fair-copy">
         <p class="eyebrow">In Malta this month</p>
-        <h2 id="malta-title">Meet Jan in person at the Malta International Uni Fair.</h2>
+        <h2 id="malta-title">Meet Jan in person at the <span class="malta">Malta</span> International Uni Fair.</h2>
         <p class="fair-date">Monday 23 November 2026 · 9:00–16:00 · AX ODYCY Hotel, St Paul's Bay</p>
         <p class="muted">Request a slot above so Jan can set aside enough time for you. Evening or Tuesday 24 November slots depending on demand.</p>
       </div>
       <div class="fair-actions">
-        <a class="btn btn-green btn-lg arrow" href="#book">Reserve a slot with Jan</a>
+        <a class="btn btn-green btn-lg arrow" href="https://meet.brevo.com/jan-van-breen" target="_blank" rel="noopener">Reserve a slot with Jan</a>
         <a class="btn btn-outline btn-lg" href="https://forms.gle/gNS1Kbu8PqT5YPvR9" target="_blank" rel="noopener">Register for the fair</a>
       </div>
     </div>
@@ -424,7 +429,7 @@ footer .brand { color: var(--blue); }
     <div class="final">
       <h2 id="final-title">Don't just ask what a university costs. Ask what you're getting.</h2>
       <p class="lede muted" style="font-weight:500">30 minutes with Jan. Honest answers about fit, costs, housing and what the 3 years lead to.</p>
-      <a class="btn btn-green btn-lg arrow" href="#book">Book my free call</a>
+      <a class="btn btn-green btn-lg arrow" href="https://meet.brevo.com/jan-van-breen" target="_blank" rel="noopener">Book my free call</a>
     </div>
   </div>
 </section>
@@ -435,20 +440,19 @@ footer .brand { color: var(--blue); }
   <div class="wrap">
     <div class="footer-row">
       <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
-      <!-- Social links: replace each # with the profile URL -->
       <div class="socials" aria-label="Follow Tio">
-        <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.3-1.3H17V2.3h-2.6C11.7 2.3 10.5 4 10.5 6.5v2H8v3.3h2.5V22H14V11.8h2.6l.5-3.3H14z"/></svg></a>
-        <a href="#" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.2a2.8 2.8 0 0 0-2-2C18.8 4.7 12 4.7 12 4.7s-6.8 0-8.5.5a2.8 2.8 0 0 0-2 2C1 8.9 1 12 1 12s0 3.1.5 4.8a2.8 2.8 0 0 0 2 2c1.7.5 8.5.5 8.5.5s6.8 0 8.5-.5a2.8 2.8 0 0 0 2-2c.5-1.7.5-4.8.5-4.8s0-3.1-.5-4.8zM9.8 15.1V8.9l5.7 3.1-5.7 3.1z"/></svg></a>
-        <a href="#" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.3v13.3a2.9 2.9 0 1 1-2.1-2.8V9.1a6.3 6.3 0 1 0 5.4 6.2V8.6a7.7 7.7 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4z"/></svg></a>
-        <a href="mailto:Jan.van.Breen@vbbsc.eu" aria-label="Email Jan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a>
+        <a href="https://www.instagram.com/tiostudentadvisor/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/people/Tio-Student-Advisor/61591907577207/" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.3-1.3H17V2.3h-2.6C11.7 2.3 10.5 4 10.5 6.5v2H8v3.3h2.5V22H14V11.8h2.6l.5-3.3H14z"/></svg></a>
+        <a href="https://www.youtube.com/@TioStudentAdvisor" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.2a2.8 2.8 0 0 0-2-2C18.8 4.7 12 4.7 12 4.7s-6.8 0-8.5.5a2.8 2.8 0 0 0-2 2C1 8.9 1 12 1 12s0 3.1.5 4.8a2.8 2.8 0 0 0 2 2c1.7.5 8.5.5 8.5.5s6.8 0 8.5-.5a2.8 2.8 0 0 0 2-2c.5-1.7.5-4.8.5-4.8s0-3.1-.5-4.8zM9.8 15.1V8.9l5.7 3.1-5.7 3.1z"/></svg></a>
+        <a href="https://www.tiktok.com/@tio_student_advisor" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.3v13.3a2.9 2.9 0 1 1-2.1-2.8V9.1a6.3 6.3 0 1 0 5.4 6.2V8.6a7.7 7.7 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4z"/></svg></a>
+        <a href="mailto:tiostudentadvisor@outlook.com" aria-label="Email Tio Student Advisor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a>
       </div>
     </div>
     <p>Fees, deadlines, English requirements, scholarships and accommodation can change; please confirm details with Tio. 98% employment: HBO Monitor, Tio International Study Guide 26/27. Ranking: Keuzegids hbo (HEG 2026).</p>
   </div>
 </footer>
 
-<div class="mobile-cta"><a class="btn btn-green arrow" href="#book">Book a free call with Jan</a></div>
+<div class="mobile-cta"><a class="btn btn-green arrow" href="https://meet.brevo.com/jan-van-breen" target="_blank" rel="noopener">Book a free call with Jan</a></div>
 
 <script>
 // Build the pill options for each question from data-options
