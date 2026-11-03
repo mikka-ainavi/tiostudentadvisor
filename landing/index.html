@@ -370,7 +370,7 @@ footer .brand { color: var(--blue); }
         <p class="error" id="formError" role="alert"></p>
         <div class="submit-row">
           <button type="submit" class="btn btn-green btn-lg arrow" id="submitBtn">Request my call with Jan</button>
-          <span class="small">Jan replies personally within <span class="placeholder">[X]</span> working days. Your details are used only to arrange the call.</span>
+          <span class="small">Jan typically responds within 24 hours. Your details are used only to arrange the call.</span>
         </div>
       </div>
 
@@ -505,7 +505,7 @@ form.addEventListener('submit', async e => {
   try {
     const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
     const out = await res.json().catch(() => ({}));
-    if (!res.ok || !out.ok) throw new Error(out.error || 'Request failed');
+    if (!res.ok || !out.ok) throw Object.assign(new Error(out.error || 'Request failed'), { ref: out.ref });
 
     // Conversion events for ads (run only if the tags are installed on the page)
     try { window.dataLayer && window.dataLayer.push({ event: 'lead_submitted', lead_role: data.who }); } catch {}
@@ -519,7 +519,7 @@ form.addEventListener('submit', async e => {
   } catch (err) {
     errorEl.textContent = (err.message && err.message.startsWith('Please'))
       ? err.message
-      : "Sorry, something went wrong sending your request. Please try again, or WhatsApp Jan on +31 6 2040 7671.";
+      : "Sorry, something went wrong sending your request. Please try again, or WhatsApp Jan on +31 6 2040 7671." + (err.ref ? ` (Ref: ${err.ref})` : '');
   } finally {
     submitBtn.removeAttribute('aria-busy');
     submitBtn.disabled = false;

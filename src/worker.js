@@ -56,7 +56,7 @@ async function handleLead(request, env) {
 
   if (!env.BREVO_API_KEY) {
     console.error('BREVO_API_KEY is not set');
-    return json({ ok: false, error: 'Server not configured' }, 500);
+    return json({ ok: false, error: 'Server not configured', ref: 'no BREVO_API_KEY' }, 500);
   }
 
   const [contact, notify] = await Promise.allSettled([saveContact(lead, env), notifyTeam(lead, env)]);
@@ -65,7 +65,15 @@ async function handleLead(request, env) {
 
   // The lead is safe if either the contact or the team email went through.
   if (contact.status === 'fulfilled' || notify.status === 'fulfilled') return json({ ok: true });
-  return json({ ok: false, error: 'Could not save your request' }, 502);
+  // The ref holds only HTTP statuses and Brevo's short error code, so it is safe to show.
+  const ref = `${describe('contact', contact)}; ${describe('email', notify)}`;
+  return json({ ok: false, error: 'Could not save your request', ref }, 502);
+}
+
+function describe(label, result) {
+  if (result.status === 'fulfilled') return `${label} ok`;
+  const { status, code } = result.reason || {};
+  return `${label} ${status || 'error'}${code ? ' ' + code : ''}`;
 }
 
 function clean(value, max = 200) {
@@ -105,11 +113,16 @@ async function brevo(env, path, payload) {
     headers: { 'api-key': env.BREVO_API_KEY, 'content-type': 'application/json', accept: 'application/json' },
     body: JSON.stringify(payload),
   });
-  if (!res.ok) throw new Error(`${path} ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  if (!res.ok) {
+    const text = await res.text();
+    let code = '';
+    try { code = String(JSON.parse(text).code || '').slice(0, 40); } catch {}
+    throw Object.assign(new Error(`${path} ${res.status}: ${text.slice(0, 300)}`), { status: res.status, code });
+  }
   return res;
 }
 
-function saveContact(lead, env) {
+async function saveContact(lead, env) {
   const [first, ...rest] = lead.name.split(/\s+/);
   const attributes = {
     FIRSTNAME: first,
@@ -124,12 +137,16 @@ function saveContact(lead, env) {
   // Don't overwrite existing values with blanks on a repeat submission.
   for (const k of Object.keys(attributes)) if (!attributes[k]) delete attributes[k];
 
-  return brevo(env, '/contacts', {
-    email: lead.email,
-    attributes,
-    listIds: [Number(env.BREVO_LIST_ID)],
-    updateEnabled: true,
-  });
+  const base = { email: lead.email, listIds: [Number(env.BREVO_LIST_ID)], updateEnabled: true };
+  try {
+    return await brevo(env, '/contacts', { ...base, attributes });
+  } catch (err) {
+    if (err.status !== 400) throw err;
+    // Most often a missing or mistyped contact attribute. Still save the person
+    // (the team email carries every answer) rather than losing the lead.
+    console.error('Brevo rejected the contact, retrying with name only:', err.message);
+    return brevo(env, '/contacts', { ...base, attributes: { FIRSTNAME: first, LASTNAME: rest.join(' ') } });
+  }
 }
 
 function notifyTeam(lead, env) {
