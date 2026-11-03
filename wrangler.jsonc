@@ -1,9 +1,21 @@
 {
-  // Cloudflare Workers static site: serves the landing page from ./landing
+  // Cloudflare Worker: serves ./landing and handles the form at POST /api/lead
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tio-book-a-call-jan",
+  "name": "tiostudentadvisor",
+  "main": "src/worker.js",
   "compatibility_date": "2026-10-01",
   "assets": {
-    "directory": "./landing"
-  }
+    "directory": "./landing",
+    "binding": "ASSETS"
+  },
+  // Keep variables added in the dashboard (e.g. NOTIFY_CC) when deploying
+  "keep_vars": true,
+  "vars": {
+    "BREVO_LIST_ID": "6",
+    "SENDER_EMAIL": "tiostudentadvisor@outlook.com",
+    "SENDER_NAME": "Tio Student Advisor",
+    "NOTIFY_TO": "tiostudentadvisor@outlook.com"
+  },
+  "observability": { "enabled": true }
+  // BREVO_API_KEY is a secret set in the Cloudflare dashboard
 }

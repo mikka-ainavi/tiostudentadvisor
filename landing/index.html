@@ -171,6 +171,10 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .field input { font: inherit; color: var(--ink); background: var(--ice); border: 1.5px solid var(--ice); border-radius: 10px; padding: 13px 14px; min-height: 50px; }
 .field input:focus { outline: none; background: var(--white); border-color: var(--blue); box-shadow: 0 0 0 3px rgba(6,54,162,.12); }
 .submit-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.consent { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: .92rem; color: var(--muted); cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--blue); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+button[aria-busy="true"] { opacity: .7; cursor: progress; }
 .error { color: #b42318; font-weight: 600; min-height: 1.4em; }
 .thanks { background: var(--green-pale); border-radius: 16px; padding: 28px; display: grid; gap: 12px; }
 .thanks h3 { font-size: 1.45rem; }
@@ -356,9 +360,16 @@ footer .brand { color: var(--blue); }
           <div class="field"><label for="f-country">Country &amp; school</label><input id="f-country" name="country" placeholder="e.g. Malta, your school"></div>
         </div>
 
+        <label class="consent" for="f-consent">
+          <input type="checkbox" id="f-consent" name="consent" required>
+          <span>I agree that Tio Business School and Jan van Breen may contact me by email, phone or WhatsApp about my study plans and this call, and may store my answers for that purpose. I can ask for my details to be deleted at any time. See the <a href="https://www.tio.nl/privacy" target="_blank" rel="noopener">privacy policy</a>.</span>
+        </label>
+        <!-- Spam trap: hidden from people, bots fill it in -->
+        <div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" name="company" tabindex="-1" autocomplete="off"></div>
+
         <p class="error" id="formError" role="alert"></p>
         <div class="submit-row">
-          <button type="submit" class="btn btn-green btn-lg arrow">Request my call with Jan</button>
+          <button type="submit" class="btn btn-green btn-lg arrow" id="submitBtn">Request my call with Jan</button>
           <span class="small">Jan replies personally within <span class="placeholder">[X]</span> working days. Your details are used only to arrange the call.</span>
         </div>
       </div>
@@ -464,7 +475,19 @@ function answered() { return names.filter(n => form.querySelector(`input[name="$
 function updateProgress() { progress.textContent = `${answered()} of ${names.length} answered`; }
 form.addEventListener('change', updateProgress);
 
-form.addEventListener('submit', e => {
+// Remember ad tracking parameters from the landing URL for this visit
+const TRACK_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'gclid', 'fbclid'];
+const tracking = (() => {
+  const params = new URLSearchParams(location.search);
+  let saved = {};
+  try { saved = JSON.parse(sessionStorage.getItem('tio_tracking') || '{}'); } catch {}
+  TRACK_KEYS.forEach(k => { if (params.get(k)) saved[k] = params.get(k); });
+  try { sessionStorage.setItem('tio_tracking', JSON.stringify(saved)); } catch {}
+  return saved;
+})();
+
+const submitBtn = document.getElementById('submitBtn');
+form.addEventListener('submit', async e => {
   e.preventDefault();
   const missing = names.length - answered();
   const name = form.elements.name.value.trim();
@@ -472,15 +495,36 @@ form.addEventListener('submit', e => {
   if (missing) { errorEl.textContent = `Please answer all 7 questions (${missing} left).`; return; }
   if (!name) { errorEl.textContent = 'Please add your name.'; form.elements.name.focus(); return; }
   if (!/^\S+@\S+\.\S+$/.test(email)) { errorEl.textContent = 'Please enter a valid email so Jan can reply.'; form.elements.email.focus(); return; }
+  if (!form.elements.consent.checked) { errorEl.textContent = 'Please tick the box so Jan can contact you.'; form.elements.consent.focus(); return; }
   errorEl.textContent = '';
 
-  const data = Object.fromEntries(new FormData(form));
-  // TODO: send `data` to your CRM / Google Sheet / email webhook, and fire ad conversion events here.
-  console.log('Lead', data);
+  const data = { ...Object.fromEntries(new FormData(form)), consent: true, ...tracking, page: location.href };
+  submitBtn.setAttribute('aria-busy', 'true');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+  try {
+    const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || 'Request failed');
 
-  document.getElementById('questions').hidden = true;
-  progress.hidden = true;
-  document.getElementById('thanks').hidden = false;
+    // Conversion events for ads (run only if the tags are installed on the page)
+    try { window.dataLayer && window.dataLayer.push({ event: 'lead_submitted', lead_role: data.who }); } catch {}
+    try { window.fbq && window.fbq('track', 'Lead'); } catch {}
+    try { window.gtag && window.gtag('event', 'generate_lead'); } catch {}
+
+    document.getElementById('questions').hidden = true;
+    progress.hidden = true;
+    document.getElementById('thanks').hidden = false;
+    document.getElementById('thanks').scrollIntoView({ block: 'center' });
+  } catch (err) {
+    errorEl.textContent = (err.message && err.message.startsWith('Please'))
+      ? err.message
+      : "Sorry, something went wrong sending your request. Please try again, or WhatsApp Jan on +31 6 2040 7671.";
+  } finally {
+    submitBtn.removeAttribute('aria-busy');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Request my call with Jan';
+  }
 });
 
 document.getElementById('editBtn').addEventListener('click', () => {

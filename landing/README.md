@@ -23,7 +23,7 @@ Images are in `img/`.
 2. **Links.** Add the three guide PDF links (`data-guide` buttons in the header) and the Instagram, Facebook, YouTube and TikTok URLs (`.socials` in the footer). They currently point to `#`.
 3. **Jan's bio.** LinkedIn could not be reached. The bio uses only facts from the Quick Summary. Add specifics such as years of experience, sectors and countries.
 4. **Placeholder.** Fill in the "[X] working days" reply time in the form. It is highlighted in yellow.
-5. **Lead capture.** In the form's submit handler, POST the form data to your CRM, Google Sheet or webhook. The page currently stores nothing.
+5. **Lead capture.** Done: the form posts to `/api/lead` (see "Form → Brevo" below).
 6. **Tracking.** Fire your Meta and Google conversion events in the same submit handler.
 7. **Fee check.** The FAQ form lists €24,950 tuition and a €250 application fee. Approved Claims list €24,500 plus €95 enrolment. The page uses the approved figures. Confirm which is current.
 8. **Privacy.** Link the consent line to Tio's privacy policy.
@@ -46,3 +46,19 @@ npm run deploy
 Run `npm run dev` to preview locally at http://localhost:8787.
 
 **Custom domain:** in the Worker, go to **Settings → Domains & Routes → Add → Custom domain** (for example `jan.tio-advisor.com`). The domain's DNS must be on Cloudflare.
+
+## Form → Brevo
+
+`src/worker.js` handles `POST /api/lead`. For each lead it:
+1. checks the 7 answers, name, email and consent (and drops bots that fill the hidden `company` field);
+2. creates or updates a Brevo contact in list **6** with these attributes: FIRSTNAME, LASTNAME, WHATSAPP, COUNTRY_SCHOOL, ROLE, PROGRAMME, INTAKE, STUDY_STAGE, ENGLISH_TEST, BUDGET, MEETING_PREF, LEAD_SOURCE, UTM_SOURCE and UTM_CAMPAIGN. Adding the contact to the list triggers the Brevo confirmation automation;
+3. emails the full lead to `NOTIFY_TO`, copying `NOTIFY_CC`. Replying to that email goes straight to the lead.
+
+The lead is counted as saved if either step 2 or step 3 succeeds. If both fail, the visitor sees an error with Jan's WhatsApp number.
+
+**Settings** (Worker → Settings → Variables and Secrets):
+- `BREVO_API_KEY` (secret): set in the dashboard.
+- `NOTIFY_CC`: add it in the dashboard as comma-separated emails. `keep_vars` stops deploys from wiping it.
+- `BREVO_LIST_ID`, `SENDER_EMAIL`, `SENDER_NAME` and `NOTIFY_TO` live in `wrangler.jsonc`.
+
+**Local test:** create `.dev.vars` containing `BREVO_API_KEY=...`, then run `npm run dev`. Setting `BREVO_API_BASE` in `.dev.vars` points the Worker at a mock server instead of Brevo. Errors show in the Worker's **Logs** tab on Cloudflare.
