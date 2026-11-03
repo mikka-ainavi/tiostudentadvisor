@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Book a call with Jan</title>
-<meta name="description" content="A free 20-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. Get an honest fit check before you choose a university.">
+<meta name="description" content="A free 30-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. Get an honest fit check before you choose a university.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -75,6 +75,9 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .brand { display: flex; align-items: center; gap: 9px; color: var(--white); text-decoration: none; }
 .brand b { font: 800 2.2rem/1 var(--font-display); letter-spacing: -.045em; }
 .brand span { font: 600 .82rem/1.05 var(--font-body); }
+.brand-group { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.locations { font: 500 .78rem/1.3 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: #c9d6f2; padding-left: 18px; border-left: 1px solid rgba(255,255,255,.3); }
+.subnav .dl { width: 18px; height: 18px; flex: none; }
 .bar .btn { border-radius: 14px; }
 /* Ice quick-nav (tio.nl's Studiekeuzetest / Open Dagen / Inschrijven row) */
 .subnav { background: var(--ice); border-bottom: 1px solid var(--line); }
@@ -82,7 +85,7 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .subnav .btn { min-height: 42px; padding: 10px 18px; font-size: .95rem; white-space: nowrap; flex: none; }
 
 /* Hero: white, blue headline, green half-circle motif from tio.nl */
-.hero { position: relative; overflow: hidden; padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 9vw, 120px); }
+.hero { position: relative; overflow: hidden; padding: clamp(40px, 6vw, 80px) 0 clamp(48px, 6vw, 80px); }
 .hero::before { content: ""; position: absolute; width: 240px; height: 240px; border-radius: 50%; background: var(--green); left: -180px; top: 90px; }
 .hero .wrap { position: relative; display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
 .hero-copy { display: grid; gap: 22px; }
@@ -91,12 +94,19 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .jan-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 16px; box-shadow: 0 18px 48px rgba(6,54,162,.12); }
 .jan-photo { position: relative; height: 280px; border-radius: 14px; background: var(--ice); display: grid; place-items: center; text-align: center; padding: 16px;
   color: var(--muted); font-weight: 600; font-size: .9rem; overflow: hidden; }
-.jan-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.jan-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 8% 45%; }
 .jan-name { display: grid; gap: 2px; }
 .jan-name strong { font: 800 1.3rem/1.2 var(--font-display); color: var(--ink); }
 .jan-name span { font-size: .95rem; color: var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { background: var(--ice); color: var(--blue); font-size: .82rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; }
+
+/* Social links */
+.socials { display: flex; flex-wrap: wrap; gap: 10px; }
+.socials a { width: 44px; height: 44px; border-radius: 50%; background: var(--ice); color: var(--blue); display: grid; place-items: center; transition: background .15s, color .15s; }
+.socials a:hover { background: var(--blue); color: var(--white); }
+.socials svg { width: 22px; height: 22px; }
+.footer-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
 
 /* Proof strip overlapping the hero edge */
 .proof { position: relative; z-index: 1; margin-top: -56px; }
@@ -105,6 +115,15 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .proof-card div { display: grid; gap: 4px; align-content: start; }
 .proof-card b { font: 800 1.6rem/1.1 var(--font-display); color: var(--blue); font-variant-numeric: tabular-nums; }
 .proof-card span { font-size: .92rem; color: var(--muted); line-height: 1.4; }
+
+/* Selling-points grid: study guide image + cards */
+.points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.points .photo { grid-column: span 2; padding: 0; overflow: hidden; border: 0; }
+.points .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.points .feature { background: var(--blue); border-color: var(--blue); align-content: center; }
+.points .feature .stat-word { color: var(--green); font-size: 2.6rem; }
+.points .feature h3 { color: var(--white); font-size: 1.3rem; }
+.points .feature p { color: #d6e0f7; }
 
 /* Cards */
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -185,16 +204,23 @@ footer .brand { color: var(--blue); }
 
 @media (max-width: 900px) {
   .hero .wrap, .why, .fair { grid-template-columns: 1fr; }
-  .grid3 { grid-template-columns: 1fr 1fr; }
+  .grid3, .points { grid-template-columns: 1fr 1fr; }
+  .points .photo { grid-column: 1 / -1; }
   .proof-card { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 620px) {
-  .grid3, .fields, .proof-card { grid-template-columns: 1fr; }
+  .grid3, .fields, .proof-card, .points { grid-template-columns: 1fr; }
+  .points .photo { grid-column: auto; }
   .wrap { padding: 0 16px; }
   .bar .btn { display: none; }
   .subnav .wrap { justify-content: flex-start; }
   .mobile-cta { display: block; }
-  .hero::before { width: 150px; height: 150px; left: -115px; top: 40px; }
+  .hero::before { display: none; }
+  .brand-group { gap: 12px; }
+  .locations { font-size: .6rem; letter-spacing: .06em; line-height: 1.35; padding-left: 12px; max-width: 170px; }
+  .subnav .wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; overflow: visible; }
+  .subnav .btn { white-space: normal; text-align: center; font-size: .78rem; padding: 8px 8px; gap: 6px; line-height: 1.2; }
+  .subnav .dl { width: 15px; height: 15px; }
   html { scroll-padding-top: 130px; }
 }
 </style>
@@ -204,16 +230,19 @@ footer .brand { color: var(--blue); }
 <header class="top">
   <div class="bar">
     <div class="wrap">
-      <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
+      <div class="brand-group">
+        <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
+        <span class="locations">Amsterdam · Utrecht · Rotterdam · Eindhoven</span>
+      </div>
       <a class="btn btn-green" href="#book">Book a free call with Jan</a>
     </div>
   </div>
-  <nav class="subnav" aria-label="On this page">
+  <nav class="subnav" aria-label="Download a guide">
     <div class="wrap">
-      <a class="btn btn-blue" href="#what">What you get</a>
-      <a class="btn btn-blue" href="#why">Why Jan</a>
-      <a class="btn btn-green" href="#book">Book a call</a>
-      <a class="btn btn-ice" href="#malta">Malta fair, 23 Nov</a>
+      <!-- Guide links: replace the # with the PDF links -->
+      <a class="btn btn-blue" href="#" data-guide="housing">Housing Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+      <a class="btn btn-blue" href="#" data-guide="international">International Study Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+      <a class="btn btn-green" href="#" data-guide="associate">Associate Degree Guide <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
     </div>
   </nav>
 </header>
@@ -224,22 +253,20 @@ footer .brand { color: var(--blue); }
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap">
     <div class="hero-copy">
-      <p class="eyebrow">For students &amp; parents planning a bachelor's abroad</p>
-      <h1 id="hero-title">Talk to a Tio lecturer before you choose a university.</h1>
-      <p class="lede">A free 20-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. You get an honest fit check, including a straight answer if Tio is not the right choice for you.</p>
+      <p class="eyebrow">For students &amp; parents planning to study in the Netherlands</p>
+      <h1 id="hero-title">Your future deserves more than a university search on Google.</h1>
+      <p class="lede">A free 30-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. You get an honest fit check, including a straight answer if Tio or the Netherlands is not the right choice for you.</p>
       <div class="hero-cta">
         <a class="btn btn-green btn-lg arrow" href="#book">Check your fit and book a call</a>
-        <a class="btn btn-outline btn-lg" href="#malta">Meeting Jan in Malta on 23 Nov?</a>
+        <a class="btn btn-outline btn-lg" href="#malta">Meet Jan in Malta on 23 Nov</a>
       </div>
-      <p class="small">No cost, no obligation. Takes 2 minutes to request.</p>
+      <p class="small">Choosing a university is hard. You don't have to figure it out alone.</p>
     </div>
 
     <aside class="jan-card" aria-label="About Jan van Breen">
-      <!-- Replace with: <img src="jan.jpg" alt="Jan van Breen"> -->
-      <div class="jan-photo">[Photo of Jan: warm, smiling, classroom or campus background]</div>
+      <div class="jan-photo"><img src="img/jan-van-breen-workshop.jpg" alt="Jan van Breen presenting a business workshop to a room of students" width="1400" height="1049"></div>
       <div class="jan-name">
         <strong>Jan van Breen</strong>
-        <span>Lecturer &amp; International Student Advisor, Tio Business School</span>
         <span>International Executive Management Consultant</span>
       </div>
       <div class="chips">
@@ -251,23 +278,34 @@ footer .brand { color: var(--blue); }
   </div>
 </section>
 
-<!-- Proof strip -->
-<div class="proof">
+<!-- Selling points: study guide photo + cards (proof strip and pillars merged) -->
+<section class="ice" aria-labelledby="points-title">
   <div class="wrap">
-    <div class="proof-card">
-      <div><b>#1 · 15 years</b><span>Ranked #1 in the Higher Education Guide (Keuzegids hbo) 15 years in a row</span></div>
-      <div><b>~10 students</b><span>Average class size, with a dedicated study coach</span></div>
-      <div><b>98%</b><span>of Tio alumni found work immediately after studying (HBO Monitor)</span></div>
-      <div><b>55+ countries</b><span>Students in a close-knit international community</span></div>
+    <div class="section-head">
+      <p class="eyebrow">What you'd be signing up for</p>
+      <h2 id="points-title">Why students choose Tio</h2>
+    </div>
+    <div class="points">
+      <div class="card photo"><img src="img/tio-international-study-guide.jpg" alt="Tio Business School International Study Guide 26/27: the leading private business school in the Netherlands, with QS Employability and Outstanding Higher Education Guide badges" width="1200" height="675"></div>
+      <div class="card feature"><span class="stat-word">#1 · 15 years</span><h3>Ranked #1 in a row</h3><p>Ranked #1 in the Higher Education Guide (Keuzegids hbo) for 15 years running (HEG 2026).</p></div>
+      <div class="card"><span class="stat-word">98%</span><h3>Straight into work</h3><p>of Tio alumni found work immediately after studying (HBO Monitor).</p></div>
+      <div class="card"><span class="stat-word">3 years</span><h3>Bachelor's on the fast track</h3><p>180 EC in 3 years. Finish sooner, start sooner. September and January intakes.</p></div>
+      <div class="card"><span class="stat-word">~10 students</span><h3>Classes of ten, on average</h3><p>You're noticed: every student has a dedicated study coach focused on personal development.</p></div>
+      <div class="card"><span class="stat-word">~60% practical</span><h3>Build, don't just take notes</h3><p>Real projects, entrepreneurship and AI tools. Your university project can be an actual company.</p></div>
+      <div class="card"><span class="stat-word">20 weeks</span><h3>Internship built in</h3><p>A full internship as part of your programme, with paid internship opportunities.</p></div>
+      <div class="card"><span class="stat-word">Guaranteed</span><h3>Housing for your whole programme</h3><p>Furnished and ready in Amsterdam, Utrecht, Rotterdam or Eindhoven.</p></div>
+      <div class="card"><span class="stat-word">99%+</span><h3>Visa support &amp; arrival</h3><p>Visa acceptance rate over 99% (reported by Tio), plus insurance, airport pick-up and a student buddy.</p></div>
+      <div class="card"><span class="stat-word">55+ countries</span><h3>A close-knit international community</h3><p>Study in English, in the country ranked #1 on the EF English Proficiency Index and in the top 10% of the Global Peace Index.</p></div>
+      <div class="card"><span class="stat-word">+12 months</span><h3>Orientation Year after you graduate</h3><p>12 extra months in the Netherlands to work or start a business.</p></div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- What you get -->
 <section id="what" aria-labelledby="what-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">What 20 minutes with Jan gets you</p>
+      <p class="eyebrow">What 30 minutes with Jan gets you</p>
       <h2 id="what-title">Leave the call knowing whether Tio fits, and what your next step is.</h2>
     </div>
     <div class="grid3">
@@ -310,37 +348,6 @@ footer .brand { color: var(--blue); }
         <p class="placeholder">[Real quote from a student or parent Jan has advised, with permission]</p>
         <figcaption class="small">[Name], [Country] · [Programme, year]</figcaption>
       </figure>
-    </div>
-  </div>
-</section>
-
-<!-- Pillars -->
-<section aria-labelledby="pillars-title">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">What you'd be signing up for</p>
-      <h2 id="pillars-title">Business, learned by doing.</h2>
-    </div>
-    <div class="grid3">
-      <div class="card"><span class="stat-word">3 years</span><h3>Bachelor's on the fast track</h3><p>180 EC in 3 years. Finish sooner, start sooner. September and January intakes.</p></div>
-      <div class="card"><span class="stat-word">~60% practical</span><h3>Build, don't just take notes</h3><p>Real projects, entrepreneurship, AI tools and a 20-week internship.</p></div>
-      <div class="card"><span class="stat-word">Guaranteed</span><h3>Housing for your whole programme</h3><p>Furnished and ready in Amsterdam, Utrecht, Rotterdam or Eindhoven.</p></div>
-      <div class="card"><span class="stat-word">99%+</span><h3>Visa support &amp; arrival</h3><p>Visa acceptance rate over 99% (reported by Tio), plus insurance, airport pick-up and a student buddy.</p></div>
-      <div class="card"><span class="stat-word">Noticed</span><h3>Classes of ten, on average</h3><p>Every student has a dedicated study coach focused on personal development.</p></div>
-      <div class="card"><span class="stat-word">+12 months</span><h3>Orientation Year after you graduate</h3><p>12 extra months in the Netherlands to work or start a business.</p></div>
-    </div>
-    <p class="muted" style="margin-top:24px">Study in English, in the country ranked #1 on the EF English Proficiency Index and in the top 10% of the Global Peace Index.</p>
-  </div>
-</section>
-
-<!-- Who books -->
-<section class="ice" aria-labelledby="who-title">
-  <div class="wrap">
-    <div class="section-head"><h2 id="who-title">Who books a call with Jan</h2></div>
-    <div class="grid3">
-      <div class="card persona"><p class="eyebrow">Students</p><h3>“Is this the right start for my future?”</h3><p>Find out what a real week looks like, which programme fits, and whether to start in September or January.</p></div>
-      <div class="card persona"><p class="eyebrow">Parents &amp; guardians</p><h3>“Will my child be safe, noticed and set up for work?”</h3><p>Look beyond the tuition fee: housing, visa, study coaching and what the 3 years actually lead to.</p></div>
-      <div class="card persona"><p class="eyebrow">School counsellors</p><h3>“Can I trust this school with my students' path?”</h3><p>Jan supports the families who reach out and keeps you informed. Ask about hosting his Mission, Vision, Strategy workshop.</p></div>
     </div>
   </div>
 </section>
@@ -413,9 +420,8 @@ footer .brand { color: var(--blue); }
 <!-- FAQ -->
 <section class="ice" aria-labelledby="faq-title">
   <div class="wrap">
-    <div class="section-head"><h2 id="faq-title">Questions families ask before booking</h2></div>
+    <div class="section-head"><h2 id="faq-title">Frequently asked questions</h2></div>
     <div class="faq">
-      <details><summary>Is the call really free? Will I be pressured to apply?</summary><p>Yes, it's free. Jan is a lecturer, not a recruiter: if Tio isn't the right choice, he'll tell you.</p></details>
       <details><summary>Which bachelor's programmes can I choose from?</summary><p>International Business Management, Business Management, Commerce Economics and Entrepreneurship, Hotel and Event Management, and International Tourism Management.</p></details>
       <details><summary>What qualifications do I need?</summary><p>A diploma equivalent to the required Dutch secondary-education level, plus English proficiency. Jan can tell you how your diploma and test are likely to be assessed; Admissions confirms.</p></details>
       <details><summary>What does it cost?</summary><p>Bachelor's tuition is €24,500 a year plus €95 enrolment. Tuition can be paid in one payment or in 12 instalments. Talent (25%) and Super Talent (50%) scholarships are available for excellent results.</p></details>
@@ -430,7 +436,7 @@ footer .brand { color: var(--blue); }
   <div class="wrap">
     <div class="final">
       <h2 id="final-title">Don't just ask what a university costs. Ask what you're getting.</h2>
-      <p class="lede muted" style="font-weight:500">20 minutes with Jan. Honest answers about fit, costs, housing and what the 3 years lead to.</p>
+      <p class="lede muted" style="font-weight:500">30 minutes with Jan. Honest answers about fit, costs, housing and what the 3 years lead to.</p>
       <a class="btn btn-green btn-lg arrow" href="#book">Book my free call</a>
     </div>
   </div>
@@ -440,7 +446,18 @@ footer .brand { color: var(--blue); }
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
+    <div class="footer-row">
+      <a class="brand" href="#top" aria-label="Tio Business School, back to top"><b>tio</b><span>Business<br>School</span></a>
+      <!-- Social links: replace each # with the profile URL -->
+      <div class="socials" aria-label="Follow Tio">
+        <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.3-1.3H17V2.3h-2.6C11.7 2.3 10.5 4 10.5 6.5v2H8v3.3h2.5V22H14V11.8h2.6l.5-3.3H14z"/></svg></a>
+        <a href="#" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.2a2.8 2.8 0 0 0-2-2C18.8 4.7 12 4.7 12 4.7s-6.8 0-8.5.5a2.8 2.8 0 0 0-2 2C1 8.9 1 12 1 12s0 3.1.5 4.8a2.8 2.8 0 0 0 2 2c1.7.5 8.5.5 8.5.5s6.8 0 8.5-.5a2.8 2.8 0 0 0 2-2c.5-1.7.5-4.8.5-4.8s0-3.1-.5-4.8zM9.8 15.1V8.9l5.7 3.1-5.7 3.1z"/></svg></a>
+        <a href="#" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.3v13.3a2.9 2.9 0 1 1-2.1-2.8V9.1a6.3 6.3 0 1 0 5.4 6.2V8.6a7.7 7.7 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4z"/></svg></a>
+        <a href="mailto:Jan.van.Breen@vbbsc.eu" aria-label="Email Jan: Jan.van.Breen@vbbsc.eu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a>
+      </div>
+    </div>
+    <p>Email Jan: <a href="mailto:Jan.van.Breen@vbbsc.eu">Jan.van.Breen@vbbsc.eu</a></p>
     <p>Fees, deadlines, English requirements, scholarships and accommodation can change; please confirm details with Tio. 98% employment: HBO Monitor, Tio International Study Guide 26/27. Ranking: Keuzegids hbo (HEG 2026).</p>
   </div>
 </footer>
