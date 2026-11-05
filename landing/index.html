@@ -3,14 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K2PS7Q8KYR"></script>
+<!-- Google tag (gtag.js), loaded only after the visitor accepts analytics cookies (see consent banner) -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K2PS7Q8KYR');
+  // Everything is denied until the visitor chooses
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+  window.loadGoogleTag = function () {
+    window.gaLoaded = true;
+    window['ga-disable-G-K2PS7Q8KYR'] = false;
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+    if (window.gaScript) return; // already loaded earlier in this visit
+    window.gaScript = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-K2PS7Q8KYR';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-K2PS7Q8KYR');
+  };
 </script>
 <title>Book a call with Jan</title>
 <meta name="description" content="A free 30-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. Get an honest fit check before you choose a university.">
@@ -217,6 +228,13 @@ footer { background: var(--white); border-top: 1px solid var(--line); padding: 2
 footer .wrap { display: grid; gap: 10px; font-size: .85rem; color: var(--muted); }
 footer .brand { color: var(--blue); }
 
+/* Cookie banner */
+.cookie { position: fixed; left: 16px; bottom: 16px; z-index: 60; width: min(560px, calc(100% - 32px)); background: var(--white); border: 1px solid var(--ice-2); border-radius: var(--radius); padding: 22px; box-shadow: 0 18px 50px rgba(6,54,162,.25); display: grid; gap: 14px; }
+.cookie h2 { font-size: 1.1rem; }
+.cookie p { font-size: .93rem; color: var(--muted); }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.cookie-actions .btn { flex: 1 1 160px; min-height: 46px; padding: 11px 18px; }
+.link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--blue); text-decoration: underline; cursor: pointer; }
 .mobile-cta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--white); border-top: 1px solid var(--line); }
 .mobile-cta .btn { width: 100%; }
 
@@ -233,6 +251,7 @@ footer .brand { color: var(--blue); }
   .bar .btn { display: none; }
   .subnav .wrap { justify-content: flex-start; }
   .mobile-cta { display: block; }
+  .cookie { left: 0; bottom: 0; width: 100%; border-radius: 20px 20px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); }
   .hero::before { display: none; }
   .brand-group { gap: 12px; }
   .locations { font-size: .6rem; letter-spacing: .06em; line-height: 1.35; padding-left: 12px; max-width: 170px; }
@@ -244,6 +263,15 @@ footer .brand { color: var(--blue); }
 </style>
 </head>
 <body>
+
+<div class="cookie" id="cookie" role="region" aria-labelledby="cookie-title" hidden>
+  <h2 id="cookie-title">Can we use analytics cookies?</h2>
+  <p>We use Google Analytics to see which ads and links bring visitors to this page, so we can improve it. Nothing is set until you choose. You can change your mind any time with "Cookie settings" at the bottom of the page. See the <a href="https://www.tio.nl/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-green" id="cookieAccept">Accept analytics</button>
+    <button type="button" class="btn btn-outline" id="cookieDecline">Decline</button>
+  </div>
+</div>
 
 <header class="top">
   <div class="bar">
@@ -457,6 +485,7 @@ footer .brand { color: var(--blue); }
         <a href="mailto:tiostudentadvisor@outlook.com" aria-label="Email Tio Student Advisor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a>
       </div>
     </div>
+    <p><button type="button" class="link-btn" id="cookieSettings">Cookie settings</button></p>
     <p>Fees, deadlines, English requirements, scholarships and accommodation can change; please confirm details with Tio. 98% employment: HBO Monitor, Tio International Study Guide 26/27. Ranking: Keuzegids hbo (HEG 2026).</p>
   </div>
 </footer>
@@ -465,7 +494,41 @@ footer .brand { color: var(--blue); }
 
 <script>
 // Analytics helper: never lets tracking break the page
-function track(name, params) { try { window.gtag && window.gtag('event', name, params || {}); } catch {} }
+function track(name, params) { try { if (window.gaLoaded) gtag('event', name, params || {}); } catch {} }
+
+// Cookie consent: remember the choice for 6 months, load Google Analytics only after "Accept"
+const CONSENT_KEY = 'tio_cookie_consent';
+const cookieBox = document.getElementById('cookie');
+function readConsent() {
+  try {
+    const v = JSON.parse(localStorage.getItem(CONSENT_KEY));
+    if (v && Date.now() - v.t < 180 * 864e5) return v.choice;
+  } catch {}
+  return null;
+}
+function saveConsent(choice) { try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ choice, t: Date.now() })); } catch {} }
+function clearGoogleCookies() {
+  const host = location.hostname;
+  document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => n.startsWith('_ga')).forEach(n => {
+    [host, '.' + host, ''].forEach(d => { document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d ? '; domain=' + d : ''}`; });
+  });
+}
+function applyConsent(choice) {
+  cookieBox.hidden = true;
+  if (choice === 'granted') {
+    window.loadGoogleTag();
+  } else {
+    window['ga-disable-G-K2PS7Q8KYR'] = true;
+    window.gaLoaded = false;
+    gtag('consent', 'update', { analytics_storage: 'denied' });
+    clearGoogleCookies();
+  }
+}
+document.getElementById('cookieAccept').addEventListener('click', () => { saveConsent('granted'); applyConsent('granted'); });
+document.getElementById('cookieDecline').addEventListener('click', () => { saveConsent('denied'); applyConsent('denied'); });
+document.getElementById('cookieSettings').addEventListener('click', () => { cookieBox.hidden = false; document.getElementById('cookieAccept').focus(); });
+const savedConsent = readConsent();
+if (savedConsent) applyConsent(savedConsent); else cookieBox.hidden = false;
 
 // Track clicks on the main calls to action, guides, socials and email
 document.addEventListener('click', e => {

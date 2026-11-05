@@ -77,3 +77,9 @@ The Google tag for property `G-K2PS7Q8KYR` is in the page `<head>`. GA4 records 
 | `social_click`, `email_click`, `fair_register_click` | footer icons and the fair registration button |
 
 In GA4, mark `generate_lead` and `book_call_click` as **key events** (Admin → Events). Tag ad links with UTM parameters, for example `?utm_source=meta&utm_medium=paid_social&utm_campaign=malta_fair`. The form also saves the UTM values into Brevo with each lead.
+
+### Cookie consent
+
+A banner asks before any analytics run. **Accept analytics** loads Google's tag, and **Decline** (or ignoring the banner) means no Google script is loaded and no analytics cookies are set. Consent Mode starts with everything denied. The choice is remembered in the browser for 6 months, and the footer's **Cookie settings** link reopens it; declining later also deletes any `_ga` cookies. Events are sent only after consent.
+
+If you add the Meta Pixel, Google Ads or another tracker, load it the same way (only after "Accept") and update the banner wording to match. Check the privacy policy link in the banner and in the form points to the right page.
