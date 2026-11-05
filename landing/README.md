@@ -62,3 +62,18 @@ The lead is counted as saved if either step 2 or step 3 succeeds. If both fail, 
 - `BREVO_LIST_ID`, `SENDER_EMAIL`, `SENDER_NAME` and `NOTIFY_TO` live in `wrangler.jsonc`.
 
 **Local test:** create `.dev.vars` containing `BREVO_API_KEY=...`, then run `npm run dev`. Setting `BREVO_API_BASE` in `.dev.vars` points the Worker at a mock server instead of Brevo. Errors show in the Worker's **Logs** tab on Cloudflare.
+
+## Analytics (Google Analytics 4)
+
+The Google tag for property `G-K2PS7Q8KYR` is in the page `<head>`. GA4 records visits and reads the traffic source from the referrer and the `utm_` parameters on the ad URL. The page also sends these events:
+
+| Event | When |
+|---|---|
+| `book_call_click` | any button that opens the Brevo meeting page |
+| `form_cta_click` | the hero button that jumps to the question form |
+| `form_start` | first answer chosen in the form |
+| `generate_lead` | form submitted and saved (sends the role and meeting preference, no personal data) |
+| `guide_download` | housing, international or associate guide button (`guide` parameter) |
+| `social_click`, `email_click`, `fair_register_click` | footer icons and the fair registration button |
+
+In GA4, mark `generate_lead` and `book_call_click` as **key events** (Admin → Events). Tag ad links with UTM parameters, for example `?utm_source=meta&utm_medium=paid_social&utm_campaign=malta_fair`. The form also saves the UTM values into Brevo with each lead.
