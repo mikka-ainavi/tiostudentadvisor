@@ -23,6 +23,22 @@
     gtag('config', 'G-K2PS7Q8KYR');
   };
 </script>
+<!-- TikTok Pixel, loaded only after the visitor accepts cookies (see consent banner) -->
+<script>
+window.loadTikTokPixel = function () {
+  window.ttqLoaded = true;
+  if (window.ttqScript) { try { ttq.grantConsent(); ttq.enableCookie(); } catch (e) {} return; } // already loaded this visit
+  window.ttqScript = true;
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+    ttq.load('DBOQIGJC77U1SRT9SBHG');
+    ttq.page();
+  }(window, document, 'ttq');
+};
+</script>
 <title>Book a call with Jan</title>
 <meta name="description" content="A free 30-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. Get an honest fit check before you choose a university.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -265,10 +281,10 @@ footer .brand { color: var(--blue); }
 <body>
 
 <div class="cookie" id="cookie" role="region" aria-labelledby="cookie-title" hidden>
-  <h2 id="cookie-title">Can we use analytics cookies?</h2>
-  <p>We use Google Analytics to see which ads and links bring visitors to this page, so we can improve it. Nothing is set until you choose. You can change your mind any time with "Cookie settings" at the bottom of the page. See the <a href="https://www.tio.nl/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
+  <h2 id="cookie-title">Can we use analytics and advertising cookies?</h2>
+  <p>We use Google Analytics and the TikTok pixel to see which ads and links bring visitors to this page, so we can improve it. Nothing is set until you choose. You can change your mind any time with "Cookie settings" at the bottom of the page. See the <a href="https://www.tio.nl/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
   <div class="cookie-actions">
-    <button type="button" class="btn btn-green" id="cookieAccept">Accept analytics</button>
+    <button type="button" class="btn btn-green" id="cookieAccept">Accept</button>
     <button type="button" class="btn btn-outline" id="cookieDecline">Decline</button>
   </div>
 </div>
@@ -495,7 +511,12 @@ footer .brand { color: var(--blue); }
 
 <script>
 // Analytics helper: never lets tracking break the page
-function track(name, params) { try { if (window.gaLoaded) gtag('event', name, params || {}); } catch {} }
+const TT_EVENTS = { generate_lead: 'SubmitForm', book_call_click: 'ClickButton', guide_download: 'Download' };
+function track(name, params) {
+  params = params || {};
+  try { if (window.gaLoaded) gtag('event', name, params); } catch {}
+  try { if (window.ttqLoaded && TT_EVENTS[name]) ttq.track(TT_EVENTS[name], { content_name: params.guide || params.button_text || 'Book a call with Jan' }); } catch {}
+}
 
 // Cookie consent: remember the choice for 6 months, load Google Analytics only after "Accept"
 const CONSENT_KEY = 'tio_cookie_consent';
@@ -508,9 +529,9 @@ function readConsent() {
   return null;
 }
 function saveConsent(choice) { try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ choice, t: Date.now() })); } catch {} }
-function clearGoogleCookies() {
+function clearTrackingCookies() {
   const host = location.hostname;
-  document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => n.startsWith('_ga')).forEach(n => {
+  document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => /^(_ga|_ttp|_tt_)/.test(n)).forEach(n => {
     [host, '.' + host, ''].forEach(d => { document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d ? '; domain=' + d : ''}`; });
   });
 }
@@ -518,11 +539,14 @@ function applyConsent(choice) {
   cookieBox.hidden = true;
   if (choice === 'granted') {
     window.loadGoogleTag();
+    window.loadTikTokPixel();
   } else {
     window['ga-disable-G-K2PS7Q8KYR'] = true;
     window.gaLoaded = false;
     gtag('consent', 'update', { analytics_storage: 'denied' });
-    clearGoogleCookies();
+    if (window.ttqLoaded) { try { ttq.revokeConsent(); ttq.disableCookie(); } catch {} }
+    window.ttqLoaded = false;
+    clearTrackingCookies();
   }
 }
 document.getElementById('cookieAccept').addEventListener('click', () => { saveConsent('granted'); applyConsent('granted'); });

@@ -80,6 +80,8 @@ In GA4, mark `generate_lead` and `book_call_click` as **key events** (Admin → 
 
 ### Cookie consent
 
-A banner asks before any analytics run. **Accept analytics** loads Google's tag, and **Decline** (or ignoring the banner) means no Google script is loaded and no analytics cookies are set. Consent Mode starts with everything denied. The choice is remembered in the browser for 6 months, and the footer's **Cookie settings** link reopens it; declining later also deletes any `_ga` cookies. Events are sent only after consent.
+A banner asks before any tracking runs. **Accept** loads Google Analytics and the TikTok pixel (`DBOQIGJC77U1SRT9SBHG`). **Decline**, or ignoring the banner, loads neither, so no scripts run and no cookies are set. The choice is remembered in the browser for 6 months, and the footer's **Cookie settings** link reopens it. Declining later also deletes the `_ga` and TikTok (`_ttp`) cookies.
 
-If you add the Meta Pixel, Google Ads or another tracker, load it the same way (only after "Accept") and update the banner wording to match. Check the privacy policy link in the banner and in the form points to the right page.
+TikTok events (sent only after Accept): `SubmitForm` when a request is saved, `ClickButton` for the booking buttons, `Download` for the guide buttons. In TikTok Ads Manager (Events), pick `SubmitForm` as the conversion to optimise for.
+
+If you add another tracker (Meta Pixel, Google Ads), load it the same way, only after Accept, and update the banner wording. Check the privacy policy link in the banner and in the form points to the right page.
