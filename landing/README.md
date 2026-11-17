@@ -80,7 +80,7 @@ In GA4, mark `generate_lead` and `book_call_click` as **key events** (Admin → 
 
 ### Cookie consent
 
-A banner asks before any tracking runs. **Accept** loads Google Analytics and the TikTok pixel (`DBOQIGJC77U1SRT9SBHG`). **Decline**, or ignoring the banner, loads neither, so no scripts run and no cookies are set. The choice is remembered in the browser for 6 months, and the footer's **Cookie settings** link reopens it. Declining later also deletes the `_ga` and TikTok (`_ttp`) cookies.
+A banner asks before any tracking runs. **Accept** loads Google Analytics, the TikTok pixel (`DBOQIGJC77U1SRT9SBHG`) and the Brevo tracker. **Decline**, or ignoring the banner, loads none of them, so no scripts run and no cookies are set. The choice is remembered in the browser for 6 months, and the footer's **Cookie settings** link reopens it. Declining later also deletes the `_ga`, TikTok (`_ttp`) and Brevo (`sib_`) cookies, and reloads the page, because Brevo's tracker can't be switched off once it is running.
 
 TikTok events (sent only after Accept): `SubmitForm` when a request is saved, `ClickButton` for the booking buttons, `Download` for the guide buttons. In TikTok Ads Manager (Events), pick `SubmitForm` as the conversion to optimise for.
 

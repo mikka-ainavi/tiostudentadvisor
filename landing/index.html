@@ -277,12 +277,30 @@ footer .brand { color: var(--blue); }
   html { scroll-padding-top: 130px; }
 }
 </style>
+<!-- Brevo tracker (Version 2.0), loaded only after the visitor accepts cookies (see consent banner) -->
+<script>
+window.loadBrevoTracker = function () {
+  if (window.brevoScript) return;
+  window.brevoScript = true;
+  window.Brevo = window.Brevo || [];
+  Brevo.push([
+    "init",
+    {
+      client_key: "eb2c3gb5ophv3j947xz9d2ag"
+    }
+  ]);
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://cdn.brevo.com/js/sdk-loader.js';
+  document.head.appendChild(s);
+};
+</script>
 </head>
 <body>
 
 <div class="cookie" id="cookie" role="region" aria-labelledby="cookie-title" hidden>
   <h2 id="cookie-title">Can we use analytics and advertising cookies?</h2>
-  <p>We use Google Analytics and the TikTok pixel to see which ads and links bring visitors to this page, so we can improve it. Nothing is set until you choose. You can change your mind any time with "Cookie settings" at the bottom of the page. See the <a href="https://www.tio.nl/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
+  <p>We use Google Analytics, the TikTok pixel and Brevo tracking to see which ads and links bring visitors to this page, so we can improve it. Nothing is set until you choose. You can change your mind any time with "Cookie settings" at the bottom of the page. See the <a href="https://www.tio.nl/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
   <div class="cookie-actions">
     <button type="button" class="btn btn-green" id="cookieAccept">Accept</button>
     <button type="button" class="btn btn-outline" id="cookieDecline">Decline</button>
@@ -531,7 +549,7 @@ function readConsent() {
 function saveConsent(choice) { try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ choice, t: Date.now() })); } catch {} }
 function clearTrackingCookies() {
   const host = location.hostname;
-  document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => /^(_ga|_ttp|_tt_)/.test(n)).forEach(n => {
+  document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => /^(_ga|_ttp|_tt_|sib_)/.test(n)).forEach(n => {
     [host, '.' + host, ''].forEach(d => { document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d ? '; domain=' + d : ''}`; });
   });
 }
@@ -540,6 +558,7 @@ function applyConsent(choice) {
   if (choice === 'granted') {
     window.loadGoogleTag();
     window.loadTikTokPixel();
+    window.loadBrevoTracker();
   } else {
     window['ga-disable-G-K2PS7Q8KYR'] = true;
     window.gaLoaded = false;
@@ -547,6 +566,8 @@ function applyConsent(choice) {
     if (window.ttqLoaded) { try { ttq.revokeConsent(); ttq.disableCookie(); } catch {} }
     window.ttqLoaded = false;
     clearTrackingCookies();
+    // Brevo's tracker cannot be switched off once running, so reload without it
+    if (window.brevoScript) location.reload();
   }
 }
 document.getElementById('cookieAccept').addEventListener('click', () => { saveConsent('granted'); applyConsent('granted'); });
