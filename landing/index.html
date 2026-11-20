@@ -131,9 +131,8 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.06; letter-spacing: -.02em; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .jan-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 16px; box-shadow: 0 18px 48px rgba(6,54,162,.12); }
-.jan-photo { position: relative; height: 280px; border-radius: 14px; background: var(--ice); display: grid; place-items: center; text-align: center; padding: 16px;
-  color: var(--muted); font-weight: 600; font-size: .9rem; overflow: hidden; }
-.jan-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 8% 45%; }
+.jan-photo { border-radius: 14px; background: var(--ice); overflow: hidden; }
+.jan-photo img { display: block; width: 100%; height: auto; }
 .jan-name { display: grid; gap: 2px; }
 .jan-name strong { font: 800 1.3rem/1.2 var(--font-display); color: var(--ink); }
 .jan-name span { font-size: .95rem; color: var(--muted); }
@@ -220,12 +219,16 @@ button[aria-busy="true"] { opacity: .7; cursor: progress; }
 .thanks .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 
 /* Malta fair */
-.fair { background: linear-gradient(135deg, #dcedfb 0%, #bfe4fa 55%, #9fd9f8 100%); border-radius: var(--radius); padding: clamp(26px, 4vw, 48px); display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: center; }
+.fair { background: linear-gradient(135deg, #dcedfb 0%, #bfe4fa 55%, #9fd9f8 100%); border-radius: var(--radius); padding: clamp(26px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(24px, 4vw, 48px); align-items: center; }
 .fair-copy { display: grid; gap: 12px; }
 .fair .malta { color: var(--red); }
 .fair .muted { color: #33425a; }
 .fair-date { display: inline-flex; gap: 10px; align-items: center; font-weight: 700; color: var(--blue); }
-.fair-actions { display: grid; gap: 10px; }
+.fair-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.fair-body { display: grid; gap: 24px; align-content: center; }
+.fair-offer { display: block; border-radius: 16px; overflow: hidden; box-shadow: 0 14px 36px rgba(14,12,105,.22); transition: transform .15s; }
+.fair-offer:hover { transform: translateY(-2px); }
+.fair-offer img { display: block; width: 100%; height: auto; }
 
 /* FAQ */
 .faq { display: grid; gap: 12px; max-width: 880px; }
@@ -267,6 +270,7 @@ footer .brand { color: var(--blue); }
   .bar .btn { display: none; }
   .subnav .wrap { justify-content: flex-start; }
   .mobile-cta { display: block; }
+  .fair-offer { order: 2; }
   .cookie { left: 0; bottom: 0; width: 100%; border-radius: 20px 20px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); }
   .hero::before { display: none; }
   .brand-group { gap: 12px; }
@@ -332,18 +336,17 @@ window.loadBrevoTracker = function () {
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap">
     <div class="hero-copy">
-      <p class="eyebrow">For students &amp; parents planning to study in the Netherlands</p>
-      <h1 id="hero-title">Your future deserves more than a university search on Google.</h1>
-      <p class="lede">A free 30-minute call with Jan van Breen, lecturer and International Student Advisor at Tio Business School. You get an honest fit check, including a straight answer if Tio or the Netherlands is not the right choice for you.</p>
+      <p class="eyebrow">Find the right university in the Netherlands. Make the decision with confidence.</p>
+      <h1 id="hero-title">Big decisions deserve better guidance.</h1>
+      <p class="lede">Don't leave your future to a Google search or a ChatGPT recommendation. Get real advice from Jan van Breen, a lecturer and International Student Advisor at Tio Business School. You get an honest fit check, including a straight answer if Tio or the Netherlands is not the right choice for you.</p>
       <div class="hero-cta">
         <a class="btn btn-green btn-lg arrow" href="#book">Check your fit and book a call</a>
         <a class="btn btn-red btn-lg" href="#malta">Meet Jan in Malta on 23 Nov</a>
       </div>
-      <p class="small">Choosing a university is hard. You don't have to figure it out alone.</p>
     </div>
 
     <aside class="jan-card" aria-label="About Jan van Breen">
-      <div class="jan-photo"><img src="img/jan-van-breen-workshop.jpg" alt="Jan van Breen presenting a business workshop to a room of students" width="1400" height="1049"></div>
+      <div class="jan-photo"><img src="img/jan-van-breen-malta-fair.jpg" alt="Meet Jan van Breen at the Malta fair: Jan sitting at the Tio Business School stand. Get 1-on-1 advice from a lecturer and international student advisor." width="1080" height="1350"></div>
       <div class="jan-name">
         <strong>Jan van Breen</strong>
         <span>International Executive Management Consultant</span>
@@ -361,7 +364,6 @@ window.loadBrevoTracker = function () {
 <section class="ice" aria-labelledby="points-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">What you'd be signing up for</p>
       <h2 id="points-title">Why students choose Tio</h2>
     </div>
     <div class="points">
@@ -384,7 +386,6 @@ window.loadBrevoTracker = function () {
 <section id="what" aria-labelledby="what-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">What 30 minutes with Jan gets you</p>
       <h2 id="what-title">Leave the call knowing whether Tio fits, and what your next step is.</h2>
     </div>
     <div class="grid3">
@@ -466,6 +467,10 @@ window.loadBrevoTracker = function () {
 <section id="malta" style="padding-top:0" aria-labelledby="malta-title">
   <div class="wrap">
     <div class="fair">
+      <a class="fair-offer" href="https://meet.brevo.com/jan-van-breen" target="_blank" rel="noopener" aria-label="Contact Jan to register and get the fair offer">
+        <img src="img/malta-fair-ardennes-offer.jpg" alt="Exclusive education fair offer: 3 days of adventure in the Belgian Ardennes. Get to know your fellow students, take on outdoor activities and be part of the Tio student community. Register during the fair and the 3-day Ardennes trip is on us. Contact Jan to register." width="1000" height="1250" loading="lazy">
+      </a>
+      <div class="fair-body">
       <div class="fair-copy">
         <p class="eyebrow">In Malta this month</p>
         <h2 id="malta-title">Meet Jan in person at the <span class="malta">Malta</span> International Uni Fair.</h2>
@@ -475,6 +480,7 @@ window.loadBrevoTracker = function () {
       <div class="fair-actions">
         <a class="btn btn-green btn-lg arrow" href="https://meet.brevo.com/jan-van-breen" target="_blank" rel="noopener">Reserve a slot with Jan</a>
         <a class="btn btn-outline btn-lg" href="https://forms.gle/gNS1Kbu8PqT5YPvR9" target="_blank" rel="noopener">Register for the fair</a>
+      </div>
       </div>
     </div>
   </div>
